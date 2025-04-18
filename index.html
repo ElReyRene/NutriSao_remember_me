@@ -67,7 +67,7 @@
         const q = query(collection(db, "usuarios"), where("correo", "==", email));
         const querySnapshot = await getDocs(q);
 
-        if (!q.empty) {
+        if (!querySnapshot.empty) {
 
           // No existe ningún documento con ese correo
           alert(`❌ El correo ${email} no está registrado.`);
@@ -81,6 +81,10 @@
             await esperar(3000); // Espera de 3 segundos
             window.location.href = "Register_screen.html";
           } catch (authError) {
+            alert(`El error es este... ${authError}`)
+            // if(authError=`El error es este... `){
+
+            // }else{}
             // Error al iniciar sesión (probablemente contraseña incorrecta)
             alert(`⚠️ Usuario con correo ${email} encontrado, pero la contraseña es incorrecta.`);
           }
