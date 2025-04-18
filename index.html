@@ -3,32 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NutriSao - Inicio</title>
+  <title>NutriSao</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <div class="login-container">
-    <!-- Imagen circular -->
+
     <img src="imag/Fondo.png" alt="NutriSao logo" class="app-icon">
 
-    <!-- Título -->
     <h1><span class="white-outline">Nutri</span><span class="green-text">Sao</span></h1>
 
-    <!-- Campo para correo -->
-    <input type="email" id="email" placeholder="Correo electrónico" required />
+    <input type="email" id="email" placeholder="Celular o correo electrónico" required />
+    <input type="password" id="password" placeholder="Contraseña" required />
 
-    <!-- Botón de inicio de sesión -->
     <button id="loginBtn" class="login-btn">Iniciar sesión</button>
+
+    <button class="signup-btn" onclick="location.href='Register_screen.html'">Crear cuenta nueva</button>
+
   </div>
 
-  <!-- Firebase SDK + código JS -->
+  <!-- Firebase -->
   <script type="module">
-    // Importar Firebase
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
 
-    // Tu configuración de Firebase (COPIA Y PEGA LA TUYA AQUÍ)
     const firebaseConfig = {
       apiKey: "AIzaSyCH32pB5Dk7cqHkaTv4SpWCHFsFrSKX9Qw",
       authDomain: "nutrisaoapp.firebaseapp.com",
@@ -38,19 +37,17 @@
       appId: "1:508649226829:web:cfa0f7c95da012ff2f9204"
     };
 
-    // Inicializar Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // Evento del botón
     document.getElementById("loginBtn").addEventListener("click", () => {
       const email = document.getElementById("email").value;
-      const password = "123456"; // contraseña temporal
+      const password = document.getElementById("password").value || "123456"; // Temporal
 
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          console.log("Usuario registrado:", userCredential.user.email);
-          location.href = "Register_screen.html";
+          console.log("Usuario guardado:", userCredential.user.email);
+          window.location.href = "Register_screen.html";
         })
         .catch((error) => {
           alert("Error: " + error.message);
@@ -60,4 +57,3 @@
 
 </body>
 </html>
-
