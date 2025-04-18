@@ -68,10 +68,8 @@
         const querySnapshot = await getDocs(q);
 
         if (!querySnapshot.empty) {
-
           // No existe ningún documento con ese correo
           alert(`❌ El correo ${email} no está registrado.`);
-
         } else {
           // Existe un documento con ese correo
           try {
@@ -81,11 +79,11 @@
             await esperar(3000); // Espera de 3 segundos
             window.location.href = "Register_screen.html";
           } catch (authError) {
-            if(authError=="FirebaseError: Firebase: Error (auth/invalid-credential)."){
-              alert(`❌ El correo ${email} no está registrado.`);
-            }else{
-              // Error al iniciar sesión (probablemente contraseña incorrecta)
+            // Verifica si el error es por credenciales inválidas
+            if (authError.code === "auth/invalid-credential") {
               alert(`⚠️ Usuario con correo ${email} encontrado, pero la contraseña es incorrecta.`);
+            } else {
+              alert(`❌ Usuario no encontrado: ${authError.message}`);
             }
           }
         }
@@ -94,6 +92,23 @@
         alert("❌ Error inesperado: " + error.message);
       }
     });
+
+// Esta función la puedes poner antes o después, sirve para esperar N milisegundos
+function esperar(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+  } catch (error) {
+    alert("❌ Error inesperado: " + error.message);
+  }
+});
+
+// Esta función la puedes poner antes o después, sirve para esperar N milisegundos
+function esperar(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 
 
     // 🆕 CREAR CUENTA NUEVA
