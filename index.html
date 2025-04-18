@@ -51,6 +51,7 @@
     const loginBtn = document.getElementById("loginBtn");
     const registerBtn = document.getElementById("registerBtn");
 
+
     // 🔒 INICIAR SESIÓN
     loginBtn.addEventListener("click", async () => {
       const email = emailInput.value;
@@ -65,14 +66,16 @@
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          window.location.href = "Register_screen.html";
+          alert(`✅ Usuario encontrado: ${email}`);
+          // Aquí ya no redirige a otra pantalla
         } else {
-          alert("Usuario no registrado en la base de datos.");
+          alert("⚠️ Usuario no registrado en la base de datos.");
         }
       } catch (error) {
-        alert("Error al iniciar sesión: " + error.message);
+        alert("Error: Usuario no encontrado... ### Crear cuenta nueva ###");
       }
     });
+
 
     // 🆕 CREAR CUENTA NUEVA
     registerBtn.addEventListener("click", async () => {
@@ -83,19 +86,24 @@
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const uid = userCredential.user.uid;
 
-        // Guarda usuario en Firestore
+        // Guarda el usuario en Firestore
         await setDoc(doc(db, "usuarios", uid), {
           correo: email,
           fechaRegistro: new Date()
         });
 
+        // Solo si todo salió bien, redirige
         window.location.href = "Register_screen.html";
       } catch (error) {
-        alert("Error al crear cuenta: " + error.message);
+        if (error.code === 'auth/email-already-in-use') {
+          alert("❗El usuario ya existe. Inicia sesión en su lugar.");
+        } else {
+          alert("Error al crear cuenta: " + error.message);
+        }
       }
     });
-  </script>
 
+  </script>
 
 </body>
 </html>
