@@ -1,104 +1,58 @@
 body {
   margin: 0;
-  padding: 0;
-  font-family: 'Helvetica', sans-serif;
-  background-color: white;
+  background-color: #f6f8fa;
+  font-family: sans-serif;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
 }
 
-.main-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 400px;
-  padding: 20px;
-}
-
-.logo-img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%; /* Hace la imagen circular */
-  border: 2px solid #ccc;
-  margin-bottom: 10px;
-}
-
-
-.logo {
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 30px;
+.login-container {
   text-align: center;
-}
-
-.nutri {
-  color: white;
-  -webkit-text-stroke: 1px black;
-}
-
-.sao {
-  color: #1d9a44;
-}
-
-.form-container {
   background-color: white;
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  padding: 20px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-container input {
-  padding: 14px;
-  font-size: 16px;
-  border: 1px solid #ccc;
+.app-icon {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.white-outline {
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.green-text {
+  color: green;
+}
+
+input {
+  width: 80%;
+  padding: 10px;
+  font-size: 1rem;
+  margin: 10px 0;
   border-radius: 8px;
-  outline: none;
+  border: 1px solid #ccc;
 }
 
 .login-btn {
-  background-color: #14532d;
+  background-color: #1c5d3d; /* Verde oscurito */
   color: white;
-  padding: 14px;
-  font-size: 16px;
-  font-weight: bold;
   border: none;
+  padding: 12px 30px;
+  font-size: 18px;
   border-radius: 8px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .login-btn:hover {
-  background-color: #0f3f23;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid #dadde1;
-  margin: 10px 0;
-}
-
-.create-btn {
-  display: block;
-  text-align: center;
-  background-color: white;
-  border: 1px solid #42b72a;
-  color: #42b72a;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.create-btn:hover {
-  background-color: #f0fff0;
+  background-color: #164d32;
 }
