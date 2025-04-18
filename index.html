@@ -81,12 +81,12 @@
             await esperar(3000); // Espera de 3 segundos
             window.location.href = "Register_screen.html";
           } catch (authError) {
-            alert(`El error es este... ${authError}`)
-            // if(authError=`El error es este... `){
-
-            // }else{}
-            // Error al iniciar sesión (probablemente contraseña incorrecta)
-            alert(`⚠️ Usuario con correo ${email} encontrado, pero la contraseña es incorrecta.`);
+            if(authError=="FirebaseError: Firebase: Error (auth/invalid-credential)."){
+              alert(`❌ El correo ${email} no está registrado.`);
+            }else{
+              // Error al iniciar sesión (probablemente contraseña incorrecta)
+              alert(`⚠️ Usuario con correo ${email} encontrado, pero la contraseña es incorrecta.`);
+            }
           }
         }
 
