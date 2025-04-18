@@ -67,7 +67,7 @@
         const q = query(collection(db, "usuarios"), where("correo", "==", email));
         const querySnapshot = await getDocs(q);
 
-        if (!querySnapshot.empty) {
+        if (!q.empty) {
 
           // No existe ningún documento con ese correo
           alert(`❌ El correo ${email} no está registrado.`);
