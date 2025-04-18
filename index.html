@@ -33,12 +33,7 @@
 
     // Tu configuración de Firebase
     const firebaseConfig = {
-      apiKey: "AIzaSyCH32pB5Dk7cqHkaTv4SpWCHFsFrSKX9Qw",
-      authDomain: "nutrisaoapp.firebaseapp.com",
-      projectId: "nutrisaoapp",
-      storageBucket: "nutrisaoapp.firebasestorage.app",
-      messagingSenderId: "508649226829",
-      appId: "1:508649226829:web:cfa0f7c95da012ff2f9204"
+      
     };
 
     // Inicializa Firebase
@@ -63,7 +58,10 @@
         const q = query(collection(db, "usuarios"), where("correo", "==", email));
         const querySnapshot = await getDocs(q);
 
-        if (!querySnapshot.empty) {
+        if (querySnapshot.empty) {
+          // No existe ningún documento con ese correo
+          alert(`❌ El correo ${email} no está registrado.`);
+        } else {
           // Existe un documento con ese correo
           try {
             // Paso 2: Intentar iniciar sesión con Auth
@@ -73,9 +71,6 @@
             // Error al iniciar sesión (probablemente contraseña incorrecta)
             alert(`⚠️ Usuario con correo ${email} encontrado, pero la contraseña es incorrecta.`);
           }
-        } else {
-          // No existe ningún documento con ese correo
-          alert(`❌ El correo ${email} no está registrado.`);
         }
 
       } catch (error) {
