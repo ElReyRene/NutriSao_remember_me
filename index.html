@@ -93,13 +93,6 @@
       }
     });
 
-// Esta función la puedes poner antes o después, sirve para esperar N milisegundos
-function esperar(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-
-
     // 🆕 CREAR CUENTA NUEVA
     registerBtn.addEventListener("click", async () => {
       const email = emailInput.value;
