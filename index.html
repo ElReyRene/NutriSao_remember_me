@@ -28,6 +28,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+    import { getDocs, query, collection, where } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
     import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
     // Tu configuración de Firebase
@@ -58,21 +59,27 @@
       const password = passwordInput.value;
 
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const uid = userCredential.user.uid;
+        // Paso 1: Buscar si el correo existe en la base de datos (Firestore)
+        const q = query(collection(db, "usuarios"), where("correo", "==", email));
+        const querySnapshot = await getDocs(q);
 
-        // Verifica si el usuario existe en Firestore
-        const docRef = doc(db, "usuarios", uid);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-          alert(`✅ Usuario encontrado: ${email}`);
-          // Aquí ya no redirige a otra pantalla
+        if (!querySnapshot.empty) {
+          // Existe un documento con ese correo
+          try {
+            // Paso 2: Intentar iniciar sesión con Auth
+            await signInWithEmailAndPassword(auth, email, password);
+            alert(`✅ Usuario encontrado: ${email}`);
+          } catch (authError) {
+            // Error al iniciar sesión (probablemente contraseña incorrecta)
+            alert(`⚠️ Usuario con correo ${email} encontrado, pero la contraseña es incorrecta.`);
+          }
         } else {
-          alert("⚠️ Usuario no registrado en la base de datos.");
+          // No existe ningún documento con ese correo
+          alert(`❌ El correo ${email} no está registrado.`);
         }
+
       } catch (error) {
-        alert("Error: Usuario no encontrado... ### Crear cuenta nueva ###");
+        alert("❌ Error inesperado: " + error.message);
       }
     });
 
@@ -91,9 +98,9 @@
           correo: email,
           fechaRegistro: new Date()
         });
-
+        alert(`✅ Usuario creado con éxito: ${email}`);
         // Solo si todo salió bien, redirige
-        window.location.href = "Register_screen.html";
+        //window.location.href = "Register_screen.html";
       } catch (error) {
         if (error.code === 'auth/email-already-in-use') {
           alert("❗El usuario ya existe. Inicia sesión en su lugar.");
