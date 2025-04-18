@@ -52,6 +52,10 @@
     const loginBtn = document.getElementById("loginBtn");
     const registerBtn = document.getElementById("registerBtn");
 
+    // Función para esperar
+    function esperar(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     // 🔒 INICIAR SESIÓN
     loginBtn.addEventListener("click", async () => {
@@ -74,6 +78,8 @@
             // Paso 2: Intentar iniciar sesión con Auth
             await signInWithEmailAndPassword(auth, email, password);
             alert(`✅ Usuario encontrado: ${email}`);
+            await esperar(3000); // Espera de 3 segundos
+            window.location.href = "Register_screen.html";
           } catch (authError) {
             // Error al iniciar sesión (probablemente contraseña incorrecta)
             alert(`⚠️ Usuario con correo ${email} encontrado, pero la contraseña es incorrecta.`);
@@ -95,12 +101,13 @@
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const uid = userCredential.user.uid;
 
+        alert(`✅ Usuario creado con éxito: ${email}`);
+
         // Guarda el usuario en Firestore
         await setDoc(doc(db, "usuarios", uid), {
           correo: email,
           fechaRegistro: new Date()
         });
-        alert(`✅ Usuario creado con éxito: ${email}`);
         // Solo si todo salió bien, redirige
         //window.location.href = "Register_screen.html";
       } catch (error) {
