@@ -131,6 +131,35 @@
       }
     }
   </style>
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+  
+    const firebaseConfig = {
+      apiKey: "Dato", 
+      authDomain: "Dato",
+      projectId: "Dato", 
+      storageBucket: "Dato",
+      messagingSenderId: "Dato",
+      appId: "Dato"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+  
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const email = encodeURIComponent(user.email);
+        const links = document.querySelectorAll(".register-link");
+        links.forEach(link => {
+          link.href = `Register_screen.html?email=${email}`;
+        });
+      }
+    });
+  </script>
+  
+
 </head>
 <body> <a href="Register_screen.html" class="top-left-button">👤 Cuenta</a>
 
@@ -142,7 +171,13 @@
 
   <!-- Día: Lunes -->
   <div class="day-section" data-day="lunes">
-    <div class="day-title">Lunes</div>
+    <!-- Título del día y enlace a la cuenta -->
+    <div class="day-title">
+      Lunes
+      <a href="Register_screen.html" class="top-left-button register-link">👤 Registro</a>
+    </div>
+  
+    <!-- Contenedor de comidas -->
     <div class="meals-container">
       <div class="meal-list">
         <div class="meal-item">
@@ -162,6 +197,8 @@
           <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
         </div>
       </div>
+  
+      <!-- Contenedor del progreso -->
       <div class="progress-wrapper">
         <div class="progress-circle"></div>
       </div>
@@ -171,7 +208,13 @@
   <!-- Puedes repetir esta sección para los demás días: Martes, Miércoles, etc. -->
   <!-- Día: Martes -->
   <div class="day-section" data-day="martes">
-    <div class="day-title">Martes</div>
+    <!-- Título del día y enlace a la cuenta -->
+    <div class="day-title">
+      Martes
+      <a href="Register_screen.html" class="top-left-button register-link">👤 Registro</a>
+    </div>
+  
+    <!-- Contenedor de comidas -->
     <div class="meals-container">
       <div class="meal-list">
         <div class="meal-item">
@@ -191,6 +234,8 @@
           <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
         </div>
       </div>
+  
+      <!-- Contenedor del progreso -->
       <div class="progress-wrapper">
         <div class="progress-circle"></div>
       </div>
@@ -199,7 +244,13 @@
 
   <!-- Día: Miércoles -->
   <div class="day-section" data-day="miercoles">
-    <div class="day-title">Miércoles</div>
+    <!-- Título del día y enlace a la cuenta -->
+    <div class="day-title">
+      Miercoles
+      <a href="Register_screen.html" class="top-left-button register-link">👤 Registro</a>
+    </div>
+  
+    <!-- Contenedor de comidas -->
     <div class="meals-container">
       <div class="meal-list">
         <div class="meal-item">
@@ -219,6 +270,8 @@
           <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
         </div>
       </div>
+  
+      <!-- Contenedor del progreso -->
       <div class="progress-wrapper">
         <div class="progress-circle"></div>
       </div>
@@ -227,37 +280,14 @@
 
   <!-- Puedes repetir esta sección para los demás días: Martes, Miércoles, etc. -->
     <!-- Día: Jueves -->
-  <div class="day-section" data-day="jueves">
-    <div class="day-title">Jueves</div>
-    <div class="meals-container">
-      <div class="meal-list">
-        <div class="meal-item">
-          <div class="meal-box"></div>
-          <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
+    <div class="day-section" data-day="jueves">
+        <!-- Título del día y enlace a la cuenta -->
+        <div class="day-title">
+          Jueves
+          <a href="Register_screen.html" class="top-left-button register-link">👤 Registro</a>
         </div>
-        <div class="meal-item">
-          <div class="meal-box"></div>
-          <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
-        </div>
-        <div class="meal-item">
-          <div class="meal-box"></div>
-          <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
-        </div>
-        <div class="meal-item">
-          <div class="meal-box"></div>
-          <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
-        </div>
-      </div>
-      <div class="progress-wrapper">
-        <div class="progress-circle"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Puedes repetir esta sección para los demás días: Martes, Miércoles, etc. -->
-    <!-- Día: Viernes -->
-    <div class="day-section" data-day="viernes">
-        <div class="day-title">Viernes</div>
+      
+        <!-- Contenedor de comidas -->
         <div class="meals-container">
           <div class="meal-list">
             <div class="meal-item">
@@ -277,6 +307,45 @@
               <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
             </div>
           </div>
+      
+          <!-- Contenedor del progreso -->
+          <div class="progress-wrapper">
+            <div class="progress-circle"></div>
+          </div>
+        </div>
+      </div>
+
+  <!-- Puedes repetir esta sección para los demás días: Martes, Miércoles, etc. -->
+    <!-- Día: Viernes -->
+    <div class="day-section" data-day="viernes">
+        <!-- Título del día y enlace a la cuenta -->
+        <div class="day-title">
+          Viernes
+          <a href="Register_screen.html" class="top-left-button register-link">👤 Registro</a>
+        </div>
+      
+        <!-- Contenedor de comidas -->
+        <div class="meals-container">
+          <div class="meal-list">
+            <div class="meal-item">
+              <div class="meal-box"></div>
+              <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
+            </div>
+            <div class="meal-item">
+              <div class="meal-box"></div>
+              <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
+            </div>
+            <div class="meal-item">
+              <div class="meal-box"></div>
+              <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
+            </div>
+            <div class="meal-item">
+              <div class="meal-box"></div>
+              <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
+            </div>
+          </div>
+      
+          <!-- Contenedor del progreso -->
           <div class="progress-wrapper">
             <div class="progress-circle"></div>
           </div>
@@ -287,7 +356,13 @@
 
   <!-- Día: Sábado -->
   <div class="day-section" data-day="sabado">
-    <div class="day-title">Sábado</div>
+    <!-- Título del día y enlace a la cuenta -->
+    <div class="day-title">
+      Sabado
+      <a href="Register_screen.html" class="top-left-button register-link">👤 Registro</a>
+    </div>
+  
+    <!-- Contenedor de comidas -->
     <div class="meals-container">
       <div class="meal-list">
         <div class="meal-item">
@@ -307,6 +382,8 @@
           <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
         </div>
       </div>
+  
+      <!-- Contenedor del progreso -->
       <div class="progress-wrapper">
         <div class="progress-circle"></div>
       </div>
@@ -317,7 +394,13 @@
 
   <!-- Día: Domingo -->
   <div class="day-section" data-day="domingo">
-    <div class="day-title">Domingo</div>
+    <!-- Título del día y enlace a la cuenta -->
+    <div class="day-title">
+      Domingo
+      <a href="Register_screen.html" class="top-left-button register-link">👤 Registro</a>
+    </div>
+  
+    <!-- Contenedor de comidas -->
     <div class="meals-container">
       <div class="meal-list">
         <div class="meal-item">
@@ -337,6 +420,8 @@
           <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
         </div>
       </div>
+  
+      <!-- Contenedor del progreso -->
       <div class="progress-wrapper">
         <div class="progress-circle"></div>
       </div>
