@@ -66,7 +66,7 @@
         await signInWithEmailAndPassword(auth, email, password);
         alert(`✅ Usuario encontrado: ${email}`);
         await esperar(3000);
-        window.location.href = "Register_screen.html";
+        window.location.href = "NutriAr.html";
       } catch (authError) {
         if (authError.code === "auth/user-not-found") {
           alert(`❌ El correo ${email} no está registrado.`);
