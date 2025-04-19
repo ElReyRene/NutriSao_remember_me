@@ -85,3 +85,10 @@ input {
   color: #333;
   text-align: left;
 }
+
+.comida-label {
+  margin: 0;
+  font-size: 0.65em; /* muy pequeño */
+  color: #333;
+  text-align: left;
+}
