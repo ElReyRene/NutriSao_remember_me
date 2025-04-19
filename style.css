@@ -79,9 +79,9 @@ input {
   background-color: #d3f2d9;
 }
 
-.column p {
+.p {
   margin: 0;
-  font-size: 1.5px;
+  font-size: 0.65em; /* muy pequeño */
   color: #333;
-  text-align: center;
+  text-align: left;
 }
