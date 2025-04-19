@@ -59,36 +59,24 @@
 
     // 🔒 INICIAR SESIÓN
     loginBtn.addEventListener("click", async () => {
-       const email = emailInput.value;
-       const password = passwordInput.value;
- 
-       try {
-         // Paso 1: Buscar si el correo existe en la base de datos (Firestore)
-         const q = query(collection(db, "usuarios"), where("correo", "==", email));
-         const querySnapshot = await getDocs(q);
- 
-         if (!querySnapshot.empty) {
-           // Existe un documento con ese correo
-           try {
-             // Paso 2: Intentar iniciar sesión con Auth
-             await signInWithEmailAndPassword(auth, email, password);
-             alert(`✅ Usuario encontrado: ${email}`);
-             await esperar(3000); // Espera de 3 segundos
-             window.location.href = "Register_screen.html";
-           } catch (authError) {
-             // Error al iniciar sesión (probablemente contraseña incorrecta)
-             alert(`Usuario/Contraseña incorrectos...`);
-           }
- 
-         } else {
-           // No existe ningún documento con ese correo
-           alert(`Usuario/Contraseña incorrectos...`);
-         }
- 
-       } catch (error) {
-         alert("❌ Error inesperado: " + error.message);
-       }
-     });
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert(`✅ Usuario encontrado: ${email}`);
+        await esperar(3000);
+        window.location.href = "Register_screen.html";
+      } catch (authError) {
+        if (authError.code === "auth/user-not-found") {
+          alert(`❌ El correo ${email} no está registrado.`);
+        } else if (authError.code === "auth/wrong-password") {
+          alert(`⚠️ Usuario con correo ${email} encontrado, pero la contraseña es incorrecta.`);
+        } else {
+          alert(`❌ Error inesperado: ${authError.message}`);
+        }
+      }
+    });
 
     // 🆕 CREAR CUENTA NUEVA
     registerBtn.addEventListener("click", async () => {
