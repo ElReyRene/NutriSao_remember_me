@@ -92,6 +92,25 @@
       background: conic-gradient(#4CAF50 0% 0%, #ccc 0% 100%);
     }
 
+    .top-left-button {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background-color: #006400;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        transition: background-color 0.3s;
+    }
+
+    .top-left-button:hover {
+        background-color: #228B22;
+    }
+
+
     /* Responsive para móvil */
     @media (max-width: 600px) {
       .meals-container {
@@ -113,7 +132,7 @@
     }
   </style>
 </head>
-<body>
+<body> <a href="Register_screen.html" class="top-left-button">👤 Cuenta</a>
 
   <h1>NutriAr</h1>
   <div class="subtitle">Hola, bienvenido a tu recordatorio de confianza</div>
