@@ -20,9 +20,9 @@
     .form-container {
       display: flex;
       justify-content: center;
-      gap: 50px;
+      gap: 30px;
       margin-bottom: 30px;
-      flex-wrap: wrap;
+      flex-wrap: wrap; /* permite que se acomoden si no hay espacio */
     }
 
     .column {
@@ -30,6 +30,8 @@
       flex-direction: column;
       gap: 15px;
       min-width: 150px;
+      flex: 1;
+      max-width: 300px;
     }
 
     .column label {
@@ -52,7 +54,7 @@
 
     input[type="text"]:focus,
     input[type="time"]:focus {
-      border-color: #228B22; /* verde un poco más brillante */
+      border-color: #228B22; /* verde más brillante */
       outline: none;
     }
 
@@ -67,28 +69,7 @@
       height: auto;
     }
 
-    /* Estilos para móviles */
-    @media (max-width: 600px) {
-      .form-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-      }
-
-      .column {
-        width: 90%;
-      }
-
-      h1 {
-        font-size: 1.8em;
-      }
-
-      input[type="text"],
-      input[type="time"] {
-        font-size: 1.1em;
-        padding: 14px;
-      }
-    }
+    /* Ya no usamos media query que cambie a columnas verticales */
   </style>
 </head>
 <body>
@@ -119,3 +100,4 @@
 
 </body>
 </html>
+
