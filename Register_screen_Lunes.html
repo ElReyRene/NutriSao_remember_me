@@ -152,18 +152,8 @@
       if (user) {
         const email = user.email.replace('.', '_'); // evitar problemas en la clave si usas Realtime DB
   
-        const comidas = [];
-        const horarios = [];
-  
-        document.querySelectorAll('.comida-label').forEach((label, index) => {
-          const comidaInput = label.nextElementSibling;
-          comidas.push(comidaInput.value);
-        });
-  
-        document.querySelectorAll('.hora-label').forEach((label, index) => {
-          const horaInput = label.nextElementSibling;
-          horarios.push(horaInput.value);
-        });
+        const comidas = Array.from(document.querySelectorAll('input[type="text"]')).map(input => input.value);
+        const horarios = Array.from(document.querySelectorAll('input[type="time"]')).map(input => input.value);
   
         const datos = {
           comidas: comidas,
@@ -180,6 +170,7 @@
           firebase.database().ref('usuarios/' + email + '/registro').set(datos)
             .then(() => alert('Datos guardados exitosamente'))
             .catch(error => console.error('Error al guardar:', error));
+          alert("Datos guardados");
         } else {
           alert('Guardado cancelado');
         }
