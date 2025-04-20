@@ -172,15 +172,15 @@
 
         // Muestra un mensaje de confirmación antes de guardar
         if (window.confirm("¿Estás seguro de que quieres guardar estos datos?")) {
-          console.log("Guardando datos para:", email);
-          console.log("Datos:", datos);
+          alert("Guardando datos para: " + email);
+          alert("Datos: " + JSON.stringify(datos));
   
           // Usando Realtime Database
           firebase.database().ref('usuarios/' + email + '/registro').set(datos)
             .then(() => alert('Datos guardados exitosamente'))
             .catch(error => console.error('Error al guardar:', error));
         } else {
-          console.log('Guardado cancelado');
+          alert('Guardado cancelado');
         }
       } else {
         alert('Usuario no autenticado');
