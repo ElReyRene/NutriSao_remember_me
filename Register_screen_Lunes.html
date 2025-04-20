@@ -171,6 +171,10 @@
           horarios: horarios,
           timestamp: new Date().toISOString()
         };
+
+        // 🔍 Agregamos estos logs para verificar
+        console.log("Guardando datos para:", email);
+        console.log("Datos:", datos);
   
         // Usando Realtime Database
         firebase.database().ref('usuarios/' + email + '/registro').set(datos)
