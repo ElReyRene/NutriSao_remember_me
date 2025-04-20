@@ -22,7 +22,7 @@
       justify-content: center;
       gap: 30px;
       margin-bottom: 30px;
-      flex-wrap: wrap; /* permite que se acomoden si no hay espacio */
+      flex-wrap: wrap;
     }
 
     .column {
@@ -43,7 +43,7 @@
     input[type="text"],
     input[type="time"] {
       padding: 12px;
-      border: 2px solid #006400; /* verde oscuro */
+      border: 2px solid #006400;
       border-radius: 5px;
       background-color: white;
       color: #333;
@@ -54,7 +54,7 @@
 
     input[type="text"]:focus,
     input[type="time"]:focus {
-      border-color: #228B22; /* verde más brillante */
+      border-color: #228B22;
       outline: none;
     }
 
@@ -69,7 +69,6 @@
       height: auto;
     }
 
-    /* Ya no usamos media query que cambie a columnas verticales */
   </style>
 </head>
 <body>
@@ -79,10 +78,10 @@
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script> <!-- O usa firestore si prefieres -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
 
   <script>
-    // Tu configuración de Firebase (reemplaza con tus credenciales reales)
+    // Tu configuración de Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyCH32pB5Dk7cqHkaTv4SpWCHFsFrSKX9Qw",
       authDomain: "nutrisaoapp.firebaseapp.com",
@@ -95,7 +94,6 @@
     // Inicializa Firebase
     firebase.initializeApp(firebaseConfig);
   </script>
-
 
   <div class="form-container">
     <div class="column">
@@ -142,7 +140,7 @@
     <img src="imag/RS_imag.png.jpeg" alt="Imagen de registro">
   </div>
 
-  <!-- // Boton para guardar datos -->
+  <!-- Botón para guardar datos -->
   <button onclick="guardarDatos()">Guardar</button>
 
   <!-- Función para guardar los datos -->
@@ -172,14 +170,18 @@
           timestamp: new Date().toISOString()
         };
 
-        // 🔍 Agregamos estos logs para verificar
-        console.log("Guardando datos para:", email);
-        console.log("Datos:", datos);
+        // Muestra un mensaje de confirmación antes de guardar
+        if (window.confirm("¿Estás seguro de que quieres guardar estos datos?")) {
+          console.log("Guardando datos para:", email);
+          console.log("Datos:", datos);
   
-        // Usando Realtime Database
-        firebase.database().ref('usuarios/' + email + '/registro').set(datos)
-          .then(() => alert('Datos guardados exitosamente'))
-          .catch(error => console.error('Error al guardar:', error));
+          // Usando Realtime Database
+          firebase.database().ref('usuarios/' + email + '/registro').set(datos)
+            .then(() => alert('Datos guardados exitosamente'))
+            .catch(error => console.error('Error al guardar:', error));
+        } else {
+          console.log('Guardado cancelado');
+        }
       } else {
         alert('Usuario no autenticado');
       }
@@ -195,4 +197,3 @@
   </script>
 </body>
 </html>
-
