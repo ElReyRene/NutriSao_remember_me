@@ -79,6 +79,8 @@
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
 
   <script>
     // Tu configuración de Firebase
@@ -166,10 +168,12 @@
           alert("Guardando datos para: " + email);
           alert("Datos: " + JSON.stringify(datos));
   
-          // Usando Realtime Database
-          firebase.database().ref('usuarios/' + email + '/registro').set(datos)
-            .then(() => alert('Datos guardados exitosamente'))
-            .catch(error => console.error('Error al guardar:', error));
+          // Usando Firebase.firestore
+          const db = firebase.firestore();
+
+          db.collection("usuarios").doc(email).collection("registro").add(datos)
+            .then(() => alert("Datos guardados en Firestore"))
+            .catch((error) => console.error("Error al guardar en Firestore:", error));
           alert("Datos guardados");
         } else {
           alert('Guardado cancelado');
