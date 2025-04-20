@@ -76,6 +76,27 @@
 
   <h1>Horario</h1>
 
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script> <!-- O usa firestore si prefieres -->
+
+  <script>
+    // Tu configuración de Firebase (reemplaza con tus credenciales reales)
+    const firebaseConfig = {
+      apiKey: "AIzaSyCH32pB5Dk7cqHkaTv4SpWCHFsFrSKX9Qw",
+      authDomain: "nutrisaoapp.firebaseapp.com",
+      projectId: "nutrisaoapp",
+      storageBucket: "nutrisaoapp.firebasestorage.app",
+      messagingSenderId: "508649226829",
+      appId: "1:508649226829:web:cfa0f7c95da012ff2f9204"
+    };
+
+    // Inicializa Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+
   <div class="form-container">
     <div class="column">
       <label>Comidas</label>
@@ -121,6 +142,53 @@
     <img src="imag/RS_imag.png.jpeg" alt="Imagen de registro">
   </div>
 
+  <!-- // Boton para guardar datos -->
+  <button onclick="guardarDatos()">Guardar</button>
+
+  <!-- Función para guardar los datos -->
+  <script>
+    function guardarDatos() {
+      const user = firebase.auth().currentUser;
+  
+      if (user) {
+        const email = user.email.replace('.', '_'); // evitar problemas en la clave si usas Realtime DB
+  
+        const comidas = [];
+        const horarios = [];
+  
+        document.querySelectorAll('.comida-label').forEach((label, index) => {
+          const comidaInput = label.nextElementSibling;
+          comidas.push(comidaInput.value);
+        });
+  
+        document.querySelectorAll('.hora-label').forEach((label, index) => {
+          const horaInput = label.nextElementSibling;
+          horarios.push(horaInput.value);
+        });
+  
+        const datos = {
+          comidas: comidas,
+          horarios: horarios,
+          timestamp: new Date().toISOString()
+        };
+  
+        // Usando Realtime Database
+        firebase.database().ref('usuarios/' + email + '/registro').set(datos)
+          .then(() => alert('Datos guardados exitosamente'))
+          .catch(error => console.error('Error al guardar:', error));
+      } else {
+        alert('Usuario no autenticado');
+      }
+    }
+  
+    // Asegura que el usuario esté autenticado
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        alert('Debes iniciar sesión primero');
+        window.location.href = "index.html"; // o tu pantalla de login
+      }
+    });
+  </script>
 </body>
 </html>
 
