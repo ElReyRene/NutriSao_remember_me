@@ -170,11 +170,39 @@
   
           // Usando Firebase.firestore
           const db = firebase.firestore();
+          const email = user.email.replace('.', '_'); // evitar errores en ID
 
-          db.collection("usuarios").doc(email).collection("registro").add(datos)
-            .then(() => alert("Datos guardados en Firestore"))
+          const comidas = Array.from(document.querySelectorAll('input[type="text"]')).map(input => input.value);
+          const horarios = Array.from(document.querySelectorAll('input[type="time"]')).map(input => {
+            const [hours, minutes] = input.value.split(":");
+            const date = new Date();
+            date.setHours(hours);
+            date.setMinutes(minutes);
+            return firebase.firestore.Timestamp.fromDate(date);
+          });
+
+          const datos = {
+            Comidas: {},
+            Horarios: {}
+          };
+
+          comidas.forEach((comida, index) => {
+            datos.Comidas[`Comida ${index + 1}`] = comida;
+          });
+
+          horarios.forEach((horario, index) => {
+            datos.Horarios[`Horario ${index + 1}`] = horario;
+          });
+
+          // Guardar solo en Lunes
+          db.collection("usuarios")
+            .doc(email)
+            .collection("Lunes")
+            .doc("datos")  // puedes cambiar el nombre si prefieres otro
+            .set(datos)
+            .then(() => alert("Datos guardados en Firestore para Lunes"))
             .catch((error) => console.error("Error al guardar en Firestore:", error));
-          alert("Datos guardados");
+
         } else {
           alert('Guardado cancelado');
         }
