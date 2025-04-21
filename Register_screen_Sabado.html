@@ -22,7 +22,7 @@
       justify-content: center;
       gap: 30px;
       margin-bottom: 30px;
-      flex-wrap: wrap; /* permite que se acomoden si no hay espacio */
+      flex-wrap: wrap;
     }
 
     .column {
@@ -43,7 +43,7 @@
     input[type="text"],
     input[type="time"] {
       padding: 12px;
-      border: 2px solid #006400; /* verde oscuro */
+      border: 2px solid #006400;
       border-radius: 5px;
       background-color: white;
       color: #333;
@@ -54,7 +54,7 @@
 
     input[type="text"]:focus,
     input[type="time"]:focus {
-      border-color: #228B22; /* verde más brillante */
+      border-color: #228B22;
       outline: none;
     }
 
@@ -69,12 +69,34 @@
       height: auto;
     }
 
-    /* Ya no usamos media query que cambie a columnas verticales */
   </style>
 </head>
 <body>
 
   <h1>Horario</h1>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+
+
+  <script>
+    // Tu configuración de Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCH32pB5Dk7cqHkaTv4SpWCHFsFrSKX9Qw",
+      authDomain: "nutrisaoapp.firebaseapp.com",
+      projectId: "nutrisaoapp",
+      storageBucket: "nutrisaoapp.firebasestorage.app",
+      messagingSenderId: "508649226829",
+      appId: "1:508649226829:web:cfa0f7c95da012ff2f9204",
+      databaseURL: "https://nutrisaoapp-default-rtdb.firebaseio.com" // <- AGREGAR ESTO
+    };
+
+    // Inicializa Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
 
   <div class="form-container">
     <div class="column">
@@ -121,6 +143,72 @@
     <img src="imag/RS_imag.png.jpeg" alt="Imagen de registro">
   </div>
 
+  <!-- Botón para guardar datos -->
+  <button onclick="guardarDatos()">Guardar</button>
+
+  <!-- Función para guardar los datos -->
+  <script>
+    function guardarDatos() {
+      const user = firebase.auth().currentUser;
+  
+      if (!user) {
+        alert('Usuario no autenticado');
+        return;
+      }
+  
+      const email = user.email.replace('.', '_'); // evitar errores en Firestore con puntos
+  
+      // Obtener los datos de los inputs
+      const comidasInputs = document.querySelectorAll('input[type="text"]');
+      const horariosInputs = document.querySelectorAll('input[type="time"]');
+  
+      const comidas = Array.from(comidasInputs).map(input => input.value);
+      const horarios = Array.from(horariosInputs).map(input => {
+        const [hours, minutes] = input.value.split(":");
+        const date = new Date();
+        date.setHours(hours);
+        date.setMinutes(minutes);
+        return firebase.firestore.Timestamp.fromDate(date);
+      });
+  
+      // Estructurar los datos
+      const datos = {
+        Comidas: {},
+        Horarios: {}
+      };
+  
+      comidas.forEach((comida, index) => {
+        datos.Comidas[`Comida ${index + 1}`] = comida;
+      });
+  
+      horarios.forEach((horario, index) => {
+        datos.Horarios[`Horario ${index + 1}`] = horario;
+      });
+  
+      // Confirmación del usuario
+      if (window.confirm("¿Estás seguro de que quieres guardar estos datos?")) {
+        const db = firebase.firestore();
+  
+        db.collection("usuarios")
+          .doc(email)
+          .collection("Sabado")
+          .add(datos) // usa .add para generar un ID automático
+          .then(() => alert("Datos guardados correctamente en Firestore (Sabado)"))
+          .catch((error) => console.error("Error al guardar en Firestore:", error));
+        alert('Datos guardados, Sabado...');
+      } else {
+        alert('Guardado cancelado');
+      }
+    }
+    // Asegura que el usuario esté autenticado
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        alert('Debes iniciar sesión primero');
+        window.location.href = "index.html"; // o tu pantalla de login
+      }
+    });
+  </script>
+  
+    
 </body>
 </html>
-
