@@ -446,6 +446,101 @@
     }
   </script>
 
+  <script>
+  firebase.auth().onAuthStateChanged((user) => {
+    if (!user) {
+      alert('Debes iniciar sesión primero');
+      window.location.href = "index.html";
+      return;
+    }
+
+    const email = user.email.replace('.', '_');
+    const db = firebase.firestore();
+
+    // Buscar el primer documento en la colección "Lunes"
+    db.collection("usuarios")
+      .doc(email)
+      .collection("Lunes")
+      .get()
+      .then((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          // Tomamos el primer documento (puedes modificar esto si quieres el más reciente)
+          const doc = querySnapshot.docs[0];
+          const datos = doc.data();
+          const comidas = datos.Comidas;
+
+          // Seleccionamos todos los elementos .meal-box
+          const cajasComida = document.querySelectorAll(".meal-box");
+
+          // Rellenamos cada .meal-box con la comida correspondiente
+          let index = 0;
+          for (let clave in comidas) {
+            if (cajasComida[index]) {
+              cajasComida[index].textContent = comidas[clave];
+              index++;
+            }
+          }
+        } else {
+          console.log("No se encontraron datos en Lunes.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al cargar las comidas:", error);
+      });
+  });
+</script>
+
+<!-- Aqui es donde se agrega lo de los strings de lo datos registrados -->
+
+<script>
+  firebase.auth().onAuthStateChanged((user) => {
+    if (!user) {
+      alert('Debes iniciar sesión primero');
+      window.location.href = "index.html";
+      return;
+    }
+
+    const email = user.email.replace('.', '_');
+    const db = firebase.firestore();
+
+    // Buscar el primer documento en la colección "Lunes"
+    db.collection("usuarios")
+      .doc(email)
+      .collection("Lunes")
+      .get()
+      .then((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          // Tomamos el primer documento (puedes modificar esto si quieres el más reciente)
+          const doc = querySnapshot.docs[0];
+          const datos = doc.data();
+          const comidas = datos.Comidas;
+
+          // Seleccionamos todos los elementos .meal-box
+          const cajasComida = document.querySelectorAll(".meal-box");
+
+          // Obtenemos todas las claves del objeto 'comidas'
+          const clavesDeComidas = Object.keys(comidas);
+          // Recorremos cada clave con un índice
+          for (let i = 0; i < clavesDeComidas.length; i++) {
+            const nombreComida = clavesDeComidas[i];       // Por ejemplo: "Comida 1"
+            const contenidoComida = comidas[nombreComida]; // Por ejemplo: "Huevos"
+
+            // Verificamos que la caja donde se va a poner sí exista
+            if (cajasComida[i]) {
+              cajasComida[i].textContent = contenidoComida;
+            }
+          }
+        } else {
+          alert("No se encontraron datos en Lunes.");
+        }
+      })
+      .catch((error) => {
+        alert("Error al cargar las comidas:", error);
+      });
+  });
+</script>
+
+
 </body>
 </html>
 
