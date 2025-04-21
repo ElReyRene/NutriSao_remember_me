@@ -199,6 +199,7 @@
       } else {
         alert('Guardado cancelado');
       }
+      window.location.href = "NutriAr.html";
     }
     // Asegura que el usuario esté autenticado
     firebase.auth().onAuthStateChanged((user) => {
@@ -208,7 +209,5 @@
       }
     });
   </script>
-  
-    
 </body>
 </html>
