@@ -234,7 +234,8 @@
           <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
         </div>
       </div>
-  
+      
+
       <!-- Contenedor del progreso -->
       <div class="progress-wrapper">
         <div class="progress-circle"></div>
@@ -531,13 +532,63 @@
             }
           }
         } else {
-          alert("No se encontraron datos en Lunes.");
+          alert("No se encontraron datos.");
         }
       })
       .catch((error) => {
         alert("Error al cargar las comidas:", error);
       });
+
   });
+</script>
+
+<!-- Script para el Lunes -->
+<script type="module">
+
+  import { getDoc, doc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+  import { db } from "./firebase-config.js"; // Asegúrate que esté correctamente importado
+  import { user } from "./firebase-config.js"; // O desde donde tengas el usuario
+
+    // Obtenemos el correo del usuario
+  const userEmail = user.email;
+
+  // Creamos la referencia al documento del día Lunes
+  const lunesRef = doc(db, userEmail, "Lunes");
+
+  try {
+    // Pedimos los datos de ese documento
+    const docSnap = await getDoc(lunesRef);
+
+    // Si el documento existe, seguimos
+    if (docSnap.exists()) {
+      // Guardamos los datos del documento
+      const data = docSnap.data();
+
+      // Sacamos la primera comida (Comida 1), si no hay ponemos "Sin datos"
+      const primeraComida = data.Comidas && data.Comidas["Comida 1"] ? data.Comidas["Comida 1"] : "Sin datos";
+
+      // Sacamos la primera hora (Horario 1), si existe la convertimos a texto legible
+      let primeraHora = "Sin hora";
+      if (data.Horarios && data.Horarios["Horario 1"]) {
+        const hora = data.Horarios["Horario 1"].toDate(); // Convertimos a tipo fecha
+        primeraHora = hora.toLocaleTimeString(); // Lo convertimos a texto
+      }
+
+      // Buscamos el primer cuadro (caja) de comida en la página
+      const mealBox = document.querySelector(".meal-box");
+
+      // Si lo encontramos, ponemos la comida y la hora
+      if (mealBox) {
+        mealBox.textContent = primeraComida + " - " + primeraHora;
+      }
+
+    } else {
+      alert("No existe el documento para Lunes");
+    }
+
+  } catch (error) {
+    alert("Error al obtener datos:", error);
+  }
 </script>
 
 
