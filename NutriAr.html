@@ -109,7 +109,14 @@
     .top-left-button:hover {
         background-color: #228B22;
     }
-
+    
+    #mostrarComidaBtn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 10px 15px;
+      font-size: 16px;
+    }
 
     /* Responsive para móvil */
     @media (max-width: 600px) {
@@ -472,6 +479,7 @@
 
     document.getElementById("mostrarComidaBtn").addEventListener("click", async () => {
       const user = auth.currentUser;
+      alert("Ejecutando accion de botón")
 
       if (user) {
         const email = user.email;
