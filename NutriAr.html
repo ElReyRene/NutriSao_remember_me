@@ -161,6 +161,7 @@
   
 
 </head>
+
 <body> 
 
   <h1>NutriAr</h1>
@@ -447,191 +448,57 @@
     }
   </script>
 
-  <script>
-  firebase.auth().onAuthStateChanged((user) => {
-    if (!user) {
-      alert('Debes iniciar sesión primero');
-      window.location.href = "index.html";
-      return;
-    }
+  <!-- Hasta aqui esta funcional -->
+  <!-- Hasta aqui esta funcional -->
+  <!-- Hasta aqui esta funcional -->
+  <!-- Hasta aqui esta funcional -->
 
-    const email = user.email.replace('.', '_');
-    const db = firebase.firestore();
 
-    // Buscar el primer documento en la colección "Lunes"
-    db.collection("usuarios")
-      .doc(email)
-      .collection("Lunes")
-      .get()
-      .then((querySnapshot) => {
-        if (!querySnapshot.empty) {
-          // Tomamos el primer documento (puedes modificar esto si quieres el más reciente)
-          const doc = querySnapshot.docs[0];
-          const datos = doc.data();
-          const comidas = datos.Comidas;
+  <!-- Obtener dato -->
+  <!-- Obtener dato -->
+  <!-- Obtener dato -->
 
-          // Seleccionamos todos los elementos .meal-box
-          const cajasComida = document.querySelectorAll(".meal-box");
+  <!-- Paso 1: Obtener dato -->
+  <!-- Paso 2: Poner botón -->
+  <!-- Paso 3: Mandar la alerta al presionar el botón -->
 
-          // Rellenamos cada .meal-box con la comida correspondiente
-          let index = 0;
-          for (let clave in comidas) {
-            if (cajasComida[index]) {
-              cajasComida[index].textContent = comidas[clave];
-              index++;
-            }
+  <button id="mostrarComidaBtn">Mostrar comida del lunes</button>
+
+  <script type="module">
+    import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+    const db = getFirestore();
+
+    document.getElementById("mostrarComidaBtn").addEventListener("click", async () => {
+      const user = auth.currentUser;
+
+      if (user) {
+        const email = user.email;
+        const lunesRef = collection(db, "usuarios", email, "Lunes");
+
+        try {
+          const querySnapshot = await getDocs(lunesRef);
+
+          if (!querySnapshot.empty) {
+            const primerDoc = querySnapshot.docs[0];
+            const data = primerDoc.data();
+
+            const comidas = Object.values(data.Comidas || {});
+            const primeraComida = comidas.length > 0 ? comidas[0] : "Sin datos";
+
+            alert("Primera comida del lunes: " + primeraComida);
+          } else {
+            alert("No hay documentos en Lunes.");
           }
-        } else {
-          console.log("No se encontraron datos en Lunes.");
+        } catch (error) {
+          alert("Error al obtener datos: " + error.message);
         }
-      })
-      .catch((error) => {
-        console.error("Error al cargar las comidas:", error);
-      });
-  });
-</script>
-
-<!-- Aqui es donde se agrega lo de los strings de lo datos registrados -->
-
-<script>
-  firebase.auth().onAuthStateChanged((user) => {
-    if (!user) {
-      alert('Debes iniciar sesión primero');
-      window.location.href = "index.html";
-      return;
-    }
-
-    const email = user.email.replace('.', '_');
-    const db = firebase.firestore();
-
-    // Buscar el primer documento en la colección "Lunes"
-    db.collection("usuarios")
-      .doc(email)
-      .collection("Lunes")
-      .get()
-      .then((querySnapshot) => {
-        if (!querySnapshot.empty) {
-          // Tomamos el primer documento (puedes modificar esto si quieres el más reciente)
-          const doc = querySnapshot.docs[0];
-          const datos = doc.data();
-          const comidas = datos.Comidas;
-
-          // Seleccionamos todos los elementos .meal-box
-          const cajasComida = document.querySelectorAll(".meal-box");
-
-          // Obtenemos todas las claves del objeto 'comidas'
-          const clavesDeComidas = Object.keys(comidas);
-          // Recorremos cada clave con un índice
-          for (let i = 0; i < clavesDeComidas.length; i++) {
-            const nombreComida = clavesDeComidas[i];       // Por ejemplo: "Comida 1"
-            const contenidoComida = comidas[nombreComida]; // Por ejemplo: "Huevos"
-
-            // Verificamos que la caja donde se va a poner sí exista
-            if (cajasComida[i]) {
-              cajasComida[i].textContent = contenidoComida;
-            }
-          }
-        } else {
-          alert("No se encontraron datos.");
-        }
-      })
-      .catch((error) => {
-        alert("Error al cargar las comidas:", error);
-      });
-
-  });
-</script>
-
-<!-- Script para el Lunes -->
-<script type="module">
-
-  import { getDoc, doc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
-  import { db } from "./firebase-config.js"; // Asegúrate que esté correctamente importado
-  import { user } from "./firebase-config.js"; // O desde donde tengas el usuario
-
-    // Obtenemos el correo del usuario
-  const userEmail = user.email;
-
-  // Creamos la referencia al documento del día Lunes
-  const lunesRef = doc(db, userEmail, "Lunes");
-
-  try {
-    // Pedimos los datos de ese documento
-    const docSnap = await getDoc(lunesRef);
-
-    // Si el documento existe, seguimos
-    if (docSnap.exists()) {
-      // Guardamos los datos del documento
-      const data = docSnap.data();
-
-      // Sacamos la primera comida (Comida 1), si no hay ponemos "Sin datos"
-      const primeraComida = data.Comidas && data.Comidas["Comida 1"] ? data.Comidas["Comida 1"] : "Sin datos";
-
-      // Sacamos la primera hora (Horario 1), si existe la convertimos a texto legible
-      let primeraHora = "Sin hora";
-      if (data.Horarios && data.Horarios["Horario 1"]) {
-        const hora = data.Horarios["Horario 1"].toDate(); // Convertimos a tipo fecha
-        primeraHora = hora.toLocaleTimeString(); // Lo convertimos a texto
+      } else {
+        alert("Usuario no autenticado.");
       }
-
-      // Buscamos el primer cuadro (caja) de comida en la página
-      const mealBox = document.querySelector(".meal-box");
-
-      // Si lo encontramos, ponemos la comida y la hora
-      if (mealBox) {
-        mealBox.textContent = primeraComida + " - " + primeraHora;
-      }
-
-    } else {
-      alert("No existe el documento para Lunes");
-    }
-
-  } catch (error) {
-    alert("Error al obtener datos:", error);
-  }
-</script>
-
-<!-- Paso 1: Obtener dato -->
-<!-- Paso 2: Poner botón -->
-<!-- Paso 3: Mandar la alerta al presionar el botón -->
-
-<button id="mostrarComidaBtn">Mostrar comida del lunes</button>
-
-<script type="module">
-  import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
-  const db = getFirestore();
-
-  document.getElementById("mostrarComidaBtn").addEventListener("click", async () => {
-    const user = auth.currentUser;
-
-    if (user) {
-      const email = user.email;
-      const lunesRef = collection(db, "usuarios", email, "Lunes");
-
-      try {
-        const querySnapshot = await getDocs(lunesRef);
-
-        if (!querySnapshot.empty) {
-          const primerDoc = querySnapshot.docs[0];
-          const data = primerDoc.data();
-
-          const comidas = Object.values(data.Comidas || {});
-          const primeraComida = comidas.length > 0 ? comidas[0] : "Sin datos";
-
-          alert("Primera comida del lunes: " + primeraComida);
-        } else {
-          alert("No hay documentos en Lunes.");
-        }
-      } catch (error) {
-        alert("Error al obtener datos: " + error.message);
-      }
-    } else {
-      alert("Usuario no autenticado.");
-    }
-  });
-</script>
+    });
+  </script>
 
 </body>
 </html>
