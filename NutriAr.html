@@ -176,33 +176,35 @@
     // Paso 3: Mandar la alerta al presionar el botón
 
     document.getElementById("mostrarComidaBtn").addEventListener("click", async () => {
-      user = auth.currentUser;
-      alert("Ejecutando accion de botón")
+      alert("Ejecutando acción de botón");
+      // Usamos onAuthStateChanged para asegurarnos de que obtenemos el usuario correctamente
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          alert("Ejecutando acción de botón");
+          const email = user.email;
+          const lunesRef = collection(db, "usuarios", email, "Lunes");
 
-      if (user) {
-        const email = user.email;
-        const lunesRef = collection(db, "usuarios", email, "Lunes");
+          try {
+            const querySnapshot = await getDocs(lunesRef);
 
-        try {
-          const querySnapshot = await getDocs(lunesRef);
+            if (!querySnapshot.empty) {
+              const primerDoc = querySnapshot.docs[0];
+              const data = primerDoc.data();
 
-          if (!querySnapshot.empty) {
-            const primerDoc = querySnapshot.docs[0];
-            const data = primerDoc.data();
+              const comidas = Object.values(data.Comidas || {});
+              const primeraComida = comidas.length > 0 ? comidas[0] : "Sin datos";
 
-            const comidas = Object.values(data.Comidas || {});
-            const primeraComida = comidas.length > 0 ? comidas[0] : "Sin datos";
-
-            alert("Primera comida del lunes: " + primeraComida);
-          } else {
-            alert("No hay documentos en Lunes.");
+              alert("Primera comida del lunes: " + primeraComida);//Dato requerido para 1 contenedor
+            } else {
+              alert("No hay documentos en Lunes.");
+            }
+          } catch (error) {
+            alert("Error al obtener datos: " + error.message);
           }
-        } catch (error) {
-          alert("Error al obtener datos: " + error.message);
+        } else {
+          alert("Usuario no autenticado.");
         }
-      } else {
-        alert("Usuario no autenticado.");
-      }
+      });
     });
   </script>
   
