@@ -139,6 +139,11 @@
     }
   </style>
   <!-- Firebase -->
+
+  <!-- Botón para obtener dato  -->
+  <button id="mostrarComidaBtn">Mostrar comida del lunes</button>
+
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
@@ -155,11 +160,6 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-
-    // Guardar en localStorage
-    localStorage.setItem('firebaseApp', JSON.stringify(app));
-    localStorage.setItem('firebaseAuth', JSON.stringify(auth));
-    localStorage.setItem('firebaseDb', JSON.stringify(db));
   
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -168,6 +168,40 @@
         links.forEach(link => {
           link.href = `Register_screen.html?email=${email}`;
         });
+      }
+    });
+
+    // Paso 1: Obtener dato
+    // Paso 2: Poner botón
+    // Paso 3: Mandar la alerta al presionar el botón
+
+    document.getElementById("mostrarComidaBtn").addEventListener("click", async () => {
+      user = auth.currentUser;
+      alert("Ejecutando accion de botón")
+
+      if (user) {
+        const email = user.email;
+        const lunesRef = collection(db, "usuarios", email, "Lunes");
+
+        try {
+          const querySnapshot = await getDocs(lunesRef);
+
+          if (!querySnapshot.empty) {
+            const primerDoc = querySnapshot.docs[0];
+            const data = primerDoc.data();
+
+            const comidas = Object.values(data.Comidas || {});
+            const primeraComida = comidas.length > 0 ? comidas[0] : "Sin datos";
+
+            alert("Primera comida del lunes: " + primeraComida);
+          } else {
+            alert("No hay documentos en Lunes.");
+          }
+        } catch (error) {
+          alert("Error al obtener datos: " + error.message);
+        }
+      } else {
+        alert("Usuario no autenticado.");
       }
     });
   </script>
@@ -460,62 +494,7 @@
       circle.style.background = `conic-gradient(#4CAF50 0% ${percentage}%, #ccc ${percentage}% 100%)`;
     }
   </script>
-
-  <!-- Hasta aqui esta funcional -->
-  <!-- Hasta aqui esta funcional -->
-  <!-- Hasta aqui esta funcional -->
-  <!-- Hasta aqui esta funcional -->
-
-
-  <!-- Obtener dato -->
-  <!-- Obtener dato -->
-  <!-- Obtener dato -->
-
-  <!-- Paso 1: Obtener dato -->
-  <!-- Paso 2: Poner botón -->
-  <!-- Paso 3: Mandar la alerta al presionar el botón -->
-
-  <button id="mostrarComidaBtn">Mostrar comida del lunes</button>
-
-  <script type="module">
-    import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
-    // Recuperar las variables desde localStorage
-    app = JSON.parse(localStorage.getItem('firebaseApp'));
-    auth = JSON.parse(localStorage.getItem('firebaseAuth'));
-    db = JSON.parse(localStorage.getItem('firebaseDb'));
-
-    document.getElementById("mostrarComidaBtn").addEventListener("click", async () => {
-      user = auth.currentUser;
-      alert("Ejecutando accion de botón")
-
-      if (user) {
-        const email = user.email;
-        const lunesRef = collection(db, "usuarios", email, "Lunes");
-
-        try {
-          const querySnapshot = await getDocs(lunesRef);
-
-          if (!querySnapshot.empty) {
-            const primerDoc = querySnapshot.docs[0];
-            const data = primerDoc.data();
-
-            const comidas = Object.values(data.Comidas || {});
-            const primeraComida = comidas.length > 0 ? comidas[0] : "Sin datos";
-
-            alert("Primera comida del lunes: " + primeraComida);
-          } else {
-            alert("No hay documentos en Lunes.");
-          }
-        } catch (error) {
-          alert("Error al obtener datos: " + error.message);
-        }
-      } else {
-        alert("Usuario no autenticado.");
-      }
-    });
-  </script>
+  
 
 </body>
 </html>
