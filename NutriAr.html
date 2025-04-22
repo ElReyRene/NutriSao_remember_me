@@ -487,12 +487,12 @@
     db = JSON.parse(localStorage.getItem('firebaseDb'));
 
     document.getElementById("mostrarComidaBtn").addEventListener("click", async () => {
-      const user = window.auth.currentUser;
+      const user = auth.currentUser;
       alert("Ejecutando accion de botón")
 
       if (user) {
         const email = user.email;
-        const lunesRef = collection(window.db, "usuarios", email, "Lunes");
+        const lunesRef = collection(db, "usuarios", email, "Lunes");
 
         try {
           const querySnapshot = await getDocs(lunesRef);
