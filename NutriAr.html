@@ -156,9 +156,10 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    window.app=app;
-    window.auth=auth;
-    window.db=db;
+    // Guardar en localStorage
+    localStorage.setItem('firebaseApp', JSON.stringify(app));
+    localStorage.setItem('firebaseAuth', JSON.stringify(auth));
+    localStorage.setItem('firebaseDb', JSON.stringify(db));
   
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -479,6 +480,11 @@
   <script type="module">
     import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
     import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+    // Recuperar las variables desde localStorage
+    app = JSON.parse(localStorage.getItem('firebaseApp'));
+    auth = JSON.parse(localStorage.getItem('firebaseAuth'));
+    db = JSON.parse(localStorage.getItem('firebaseDb'));
 
     document.getElementById("mostrarComidaBtn").addEventListener("click", async () => {
       const user = window.auth.currentUser;
