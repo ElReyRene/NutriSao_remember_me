@@ -155,6 +155,10 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+
+    window.app=app;
+    window.auth=auth;
+    window.db=db;
   
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -477,12 +481,12 @@
     import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
     document.getElementById("mostrarComidaBtn").addEventListener("click", async () => {
-      const user = getAuth.currentUser;
+      const user = window.auth.currentUser;
       alert("Ejecutando accion de botón")
 
       if (user) {
         const email = user.email;
-        const lunesRef = collection(db, "usuarios", email, "Lunes");
+        const lunesRef = collection(window.db, "usuarios", email, "Lunes");
 
         try {
           const querySnapshot = await getDocs(lunesRef);
