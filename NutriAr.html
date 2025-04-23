@@ -478,6 +478,7 @@
       alert("Email"+window.email);
       alert("Datos: "+window.db);
       const lunesRef = collection(doc(window.db, "usuarios", window.email), "Lunes");
+      alert("Obteniendo path...");
       alert("Referencia a Lunes: " + lunesRef.path);
 
       try {
