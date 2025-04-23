@@ -476,23 +476,19 @@
       alert("Hola");
       alert("Ejecutando acción de botón");
       alert("Email"+window.email);
-      alert("Datos: "+window.db)
+      alert("Datos: "+window.db);
       const lunesRef = collection(window.db, "usuarios", window.email, "Lunes");
-      alert(lunesRef);
+      alert("Referencia a Lunes: " + lunesRef.path);
 
       try {
         const querySnapshot = await getDocs(lunesRef);
+        const primerDoc = querySnapshot.docs[0];
+        const data = primerDoc.data();
+        const comidas = Object.values(data.Comidas || {});
+        const primeraComida = comidas.length > 0 ? comidas[0] : "Sin datos";
 
-        if (!querySnapshot.empty) {
-          const primerDoc = querySnapshot.docs[0];
-          const data = primerDoc.data();
-          const comidas = Object.values(data.Comidas || {});
-          const primeraComida = comidas.length > 0 ? comidas[0] : "Sin datos";
-
-          alert("Primera comida del lunes: " + primeraComida);//Dato requerido para 1 contenedor
-        } else {
-          alert("No hay documentos en Lunes.");
-        }
+        alert("Primera comida del lunes: " + primeraComida);//Dato requerido para 1 contenedor
+        
       } catch (error) {
         alert("Error al obtener datos: " + error.message);
       }
