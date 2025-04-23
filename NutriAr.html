@@ -476,7 +476,8 @@
       alert("Hola");
       alert("Ejecutando acción de botón");
       alert("Email"+window.email);
-      const lunesRef = collection(window.db, "usuarios", email, "Lunes");
+      alert("Datos: "+window.db)
+      const lunesRef = collection(window.db, "usuarios", window.email, "Lunes");
       alert(lunesRef);
 
       try {
