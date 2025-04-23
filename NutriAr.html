@@ -162,7 +162,8 @@
   
     onAuthStateChanged(auth, async(user) => {
       if (user) {
-        window.email = encodeURIComponent(user.email);
+        // encodeURIComponent
+        window.email = user.email; 
         alert("Email obtenido:" + window.email);
 
         // Paso 1: Obtener dato
@@ -174,33 +175,11 @@
         const snapshot = await getDocs(window.lunesRef);
         alert("Snapshot: "+snapshot)
         // Obteniendo dato Lunes
+        // Obteniendo dato Lunes
+        // Obteniendo dato Lunes
         const primerDoc = snapshot.docs[0];
-        alert("Primer doc: "+primerDoc);
         const data = primerDoc.data();
         alert("data: "+data);
-        const comidas = Object.values(data.Comidas || {});
-        const mealBoxes = document.querySelectorAll('[data-day="lunes"] .meal-box');
-        for (let i = 0; i < mealBoxes.length; i++) {
-          mealBoxes[i].textContent = comidas[i] || "Sin datos";
-        }
-        alert("comida: "+comidas);
-        let primeraComida;
-        alert("1. Comida: "+primeraComida)
-
-        if (comidas.length > 0) {
-          // Si hay al menos una comida en la lista, tomamos la primera
-          primeraComida = comidas[0];
-        } else {
-          // Si no hay comidas en la lista, ponemos un mensaje indicando que no hay datos
-          primeraComida = "Sin datos";
-        }
-
-        alert("Primera comida del lunes: " + primeraComida);//Dato requerido para 1 contenedor
-
-        const links = document.querySelectorAll(".register-link");
-        links.forEach(link => {
-          link.href = `Register_screen.html?email=${window.email}`;
-        });
       }
     });
   </script>
