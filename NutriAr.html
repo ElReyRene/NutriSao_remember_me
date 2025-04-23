@@ -173,12 +173,12 @@
         window.lunesRef = collection(database, "usuarios", window.email, "Lunes");
         alert("LunesRef: "+ window.lunesRef.path);
         const snapshot = await getDocs(window.lunesRef);
-        alert("Snapshot: "+snapshot)
+        alert("Snapshot: "+ JSON.stringify(snapshot));
         // Obteniendo dato Lunes
         // Obteniendo dato Lunes
         // Obteniendo dato Lunes
         const primerDoc = snapshot.docs[0];
-        alert(primerDoc.id);
+        alert("ID del primerDoc: "+primerDoc.id);
         const data = primerDoc.data();
         // Accediendo a Comidas y Horarios
         // Accediendo a Comidas y Horarios
