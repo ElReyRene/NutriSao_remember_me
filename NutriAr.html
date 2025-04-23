@@ -157,15 +157,14 @@
   
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    database=getFirestore(app);
-    window.db = getFirestore(app);
+    const database=getFirestore(app);
     const user = auth.currentUser;
-    window.lunesRef = collection(doc(database, "usuarios", window.email), "Lunes");
   
     onAuthStateChanged(auth, (user) => {
       if (user) {
         window.email = encodeURIComponent(user.email);
         alert("Email obtenido:" + window.email);
+        window.lunesRef = collection(doc(database, "usuarios", window.email), "Lunes");
         const links = document.querySelectorAll(".register-link");
         links.forEach(link => {
           link.href = `Register_screen.html?email=${window.email}`;
@@ -479,10 +478,8 @@
       alert("Es esto... "+window.lunesRef);
       alert("Ejecutando acción de botón");
       alert("Email"+window.email);
-      alert("Datos: "+window.db);
-      const lunesRef = collection(doc(window.db, "usuarios", window.email), "Lunes");
       alert("Obteniendo path...");
-      alert("Referencia a Lunes: " + lunesRef.path);
+      alert("Referencia a Lunes: " + window.lunesRef);
 
       try {
         const querySnapshot = await getDocs(lunesRef);
