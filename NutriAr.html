@@ -163,6 +163,7 @@
     onAuthStateChanged(auth, (user) => {
       if (user) {
         email = encodeURIComponent(user.email);
+        console.log("Email obtenido:", email);
         const links = document.querySelectorAll(".register-link");
         links.forEach(link => {
           link.href = `Register_screen.html?email=${email}`;
