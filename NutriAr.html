@@ -158,10 +158,11 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+    let email=null;
   
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const email = encodeURIComponent(user.email);
+        email = encodeURIComponent(user.email);
         const links = document.querySelectorAll(".register-link");
         links.forEach(link => {
           link.href = `Register_screen.html?email=${email}`;
@@ -472,7 +473,6 @@
 
     async function obtenerDatos(){
       alert("Ejecutando acción de botón");
-      const email = user.email;
       alert("Email"+email);
       const lunesRef = collection(db, "usuarios", email, "Lunes");
       alert(lunesRef);
