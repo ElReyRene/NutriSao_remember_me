@@ -141,7 +141,7 @@
   <!-- Firebase -->
 
   <!-- Botón para obtener dato  -->
-  <button onclick="obtenerDatos()">Obtener</button>
+  <button id="btnObtener">Obtener</button>
 
 
   <script type="module">
@@ -175,7 +175,9 @@
     // Paso 2: Poner botón
     // Paso 3: Mandar la alerta al presionar el botón
 
-    function obtenerDatos(){
+    document.getElementById("btnObtener").addEventListener("click",obtenerDatos);
+
+    async function obtenerDatos(){
       alert("Ejecutando acción de botón");
       // Usamos onAuthStateChanged para asegurarnos de que obtenemos el usuario correctamente
       onAuthStateChanged(auth, async (user) => {
