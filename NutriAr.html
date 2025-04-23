@@ -174,9 +174,10 @@
         alert("LunesRef: "+ window.lunesRef.path);
         const snapshot = await getDocs(window.lunesRef);
         alert("Snapshot: "+ JSON.stringify(snapshot));
-        snapshot.forEach(doc => {
-          alert("ID: " + doc.id + "\nDatos: " + JSON.stringify(doc.data()));
-        });
+        alert("Num de documentos: "+snapshot.size);
+        // snapshot.forEach(doc => {
+        //   alert("ID: " + doc.id + "\nDatos: " + JSON.stringify(doc.data()));
+        // });
         // Obteniendo dato Lunes
         // Obteniendo dato Lunes
         // Obteniendo dato Lunes
