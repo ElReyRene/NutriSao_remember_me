@@ -160,19 +160,24 @@
     const database=getFirestore(app);
     const user = auth.currentUser;
   
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async(user) => {
       if (user) {
         window.email = encodeURIComponent(user.email);
         alert("Email obtenido:" + window.email);
-        window.lunesRef = collection(doc(database, "usuarios", window.email), "Lunes");
-        alert("LunesRef: "+ window.lunesRef);
+        window.lunesRef = collection(database, "usuarios", window.email, "Lunes");
+        alert("Se hizo lo de LunesRef");
+        const snapshot = await getDocs(window.lunesRef);
+        alert("LunesRef: "+ window.lunesRef.path);
 
         // Obteniendo dato Lunes
-        const querySnapshot = getDocs(lunesRef);
         const primerDoc = querySnapshot.docs[0];
+        alert("Primer doc: "+primerDoc);
         const data = primerDoc.data();
+        alert("data: "+data);
         const comidas = Object.values(data.Comidas || {});
+        alert("comida: "+comidas);
         let primeraComida;
+        alert("1. Comida: "+primeraComida)
 
         if (comidas.length > 0) {
           // Si hay al menos una comida en la lista, tomamos la primera
