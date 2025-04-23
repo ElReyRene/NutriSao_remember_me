@@ -158,12 +158,13 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+    const user = auth.currentUser;
     let email=null;
   
     onAuthStateChanged(auth, (user) => {
       if (user) {
         email = encodeURIComponent(user.email);
-        alert("Email obtenido:", email);
+        alert("Email obtenido:" + email);
         const links = document.querySelectorAll(".register-link");
         links.forEach(link => {
           link.href = `Register_screen.html?email=${email}`;
