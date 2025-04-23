@@ -170,15 +170,19 @@
         // Paso 3: Mandar la alerta al presionar el botón
         
         window.lunesRef = collection(database, "usuarios", window.email, "Lunes");
-        alert("LunesRef: "+ window.lunesRef.path);
+        // alert("LunesRef: "+ window.lunesRef.path);
         const snapshot = await getDocs(window.lunesRef);
-        alert("Snapshot: "+snapshot)
+        // alert("Snapshot: "+snapshot)
         // Obteniendo dato Lunes
         const primerDoc = snapshot.docs[0];
-        alert("Primer doc: "+primerDoc);
+        // alert("Primer doc: "+primerDoc);
         const data = primerDoc.data();
-        alert("data: "+data);
+        // alert("data: "+data);
         const comidas = Object.values(data.Comidas || {});
+        const mealBoxes = document.querySelectorAll('[data-day="lunes"] .meal-box');
+        for (let i = 0; i < mealBoxes.length; i++) {
+          mealBoxes[i].textContent = comidas[i] || "Sin datos";
+        }
         alert("comida: "+comidas);
         let primeraComida;
         alert("1. Comida: "+primeraComida)
@@ -206,8 +210,6 @@
 
 <body> 
 
-  <!-- Botón para obtener dato  -->
-  <button id="btnObtener">Obtener</button>
   <h1>NutriAr</h1>
   <div class="subtitle">Hola, bienvenido a tu recordatorio de confianza</div>
 
