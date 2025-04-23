@@ -170,22 +170,22 @@
         // Paso 3: Mandar la alerta al presionar el botón
         
         window.lunesRef = collection(database, "usuarios", window.email, "Lunes");
-        // alert("LunesRef: "+ window.lunesRef.path);
+        console.log("LunesRef: "+ window.lunesRef.path);
         const snapshot = await getDocs(window.lunesRef);
-        // alert("Snapshot: "+snapshot)
+        console.log("Snapshot: "+snapshot)
         // Obteniendo dato Lunes
         const primerDoc = snapshot.docs[0];
-        // alert("Primer doc: "+primerDoc);
+        console.log("Primer doc: "+primerDoc);
         const data = primerDoc.data();
-        // alert("data: "+data);
+        console.log("data: "+data);
         const comidas = Object.values(data.Comidas || {});
         const mealBoxes = document.querySelectorAll('[data-day="lunes"] .meal-box');
         for (let i = 0; i < mealBoxes.length; i++) {
           mealBoxes[i].textContent = comidas[i] || "Sin datos";
         }
-        alert("comida: "+comidas);
+        console.log("comida: "+comidas);
         let primeraComida;
-        alert("1. Comida: "+primeraComida)
+        console.log("1. Comida: "+primeraComida)
 
         if (comidas.length > 0) {
           // Si hay al menos una comida en la lista, tomamos la primera
@@ -195,7 +195,7 @@
           primeraComida = "Sin datos";
         }
 
-        alert("Primera comida del lunes: " + primeraComida);//Dato requerido para 1 contenedor
+        console.log("Primera comida del lunes: " + primeraComida);//Dato requerido para 1 contenedor
 
         const links = document.querySelectorAll(".register-link");
         links.forEach(link => {
