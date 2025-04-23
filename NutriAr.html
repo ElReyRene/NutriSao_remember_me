@@ -138,16 +138,14 @@
       }
     }
   </style>
+
   <!-- Firebase -->
-
-  <!-- Botón para obtener dato  -->
-  <button id="btnObtener">Obtener</button>
-
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-  
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
     const firebaseConfig = {
         apiKey: "AIzaSyCH32pB5Dk7cqHkaTv4SpWCHFsFrSKX9Qw",
         authDomain: "nutrisaoapp.firebaseapp.com",
@@ -170,44 +168,6 @@
         });
       }
     });
-
-    // Paso 1: Obtener dato
-    // Paso 2: Poner botón
-    // Paso 3: Mandar la alerta al presionar el botón
-
-    document.getElementById("btnObtener").addEventListener("click",obtenerDatos);
-
-    async function obtenerDatos(){
-      alert("Ejecutando acción de botón");
-      // Usamos onAuthStateChanged para asegurarnos de que obtenemos el usuario correctamente
-      onAuthStateChanged(auth, async (user) => {
-        if (user) {
-          alert("Ejecutando acción de botón");
-          const email = user.email;
-          const lunesRef = collection(db, "usuarios", email, "Lunes");
-
-          try {
-            const querySnapshot = await getDocs(lunesRef);
-
-            if (!querySnapshot.empty) {
-              const primerDoc = querySnapshot.docs[0];
-              const data = primerDoc.data();
-
-              const comidas = Object.values(data.Comidas || {});
-              const primeraComida = comidas.length > 0 ? comidas[0] : "Sin datos";
-
-              alert("Primera comida del lunes: " + primeraComida);//Dato requerido para 1 contenedor
-            } else {
-              alert("No hay documentos en Lunes.");
-            }
-          } catch (error) {
-            alert("Error al obtener datos: " + error.message);
-          }
-        } else {
-          alert("Usuario no autenticado.");
-        }
-      });
-    }
   </script>
   
 
@@ -215,6 +175,8 @@
 
 <body> 
 
+  <!-- Botón para obtener dato  -->
+  <button id="btnObtener">Obtener</button>
   <h1>NutriAr</h1>
   <div class="subtitle">Hola, bienvenido a tu recordatorio de confianza</div>
 
@@ -497,6 +459,49 @@
       const percentage = (checkedCount / 4) * 100;
       circle.style.background = `conic-gradient(#4CAF50 0% ${percentage}%, #ccc ${percentage}% 100%)`;
     }
+  </script>
+
+  <script type="module">
+    // Paso 1: Obtener dato
+    // Paso 2: Poner botón
+    // Paso 3: Mandar la alerta al presionar el botón
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("btnObtener").addEventListener("click",obtenerDatos);
+    });
+
+    async function obtenerDatos(){
+      alert("Ejecutando acción de botón");
+      // Usamos onAuthStateChanged para asegurarnos de que obtenemos el usuario correctamente
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          alert("Ejecutando acción de botón");
+          const email = user.email;
+          const lunesRef = collection(db, "usuarios", email, "Lunes");
+
+          try {
+            const querySnapshot = await getDocs(lunesRef);
+
+            if (!querySnapshot.empty) {
+              const primerDoc = querySnapshot.docs[0];
+              const data = primerDoc.data();
+
+              const comidas = Object.values(data.Comidas || {});
+              const primeraComida = comidas.length > 0 ? comidas[0] : "Sin datos";
+
+              alert("Primera comida del lunes: " + primeraComida);//Dato requerido para 1 contenedor
+            } else {
+              alert("No hay documentos en Lunes.");
+            }
+          } catch (error) {
+            alert("Error al obtener datos: " + error.message);
+          }
+        } else {
+          alert("Usuario no autenticado.");
+        }
+      });
+    }
+
   </script>
   
 
