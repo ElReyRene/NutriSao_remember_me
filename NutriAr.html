@@ -174,15 +174,14 @@
         // Esto hay que revisarlo
         // Esto hay que revisarlo
         // window.lunesRef = collection(database, "usuarios", window.email, "Lunes");
-        const lunesRef = collection(database, "usuarios", "gabmal_oficial@gmail.com", "Lunes");
         // Esto hay que revisarlo
         // Esto hay que revisarlo
         // Esto hay que revisarlo
 
         alert("LunesRef: "+ window.lunesRef.path);
-        const snapshot = await getDocs(window.lunesRef);
-        alert("Snapshot: "+ JSON.stringify(snapshot));
-        alert("Num de documentos: "+snapshot.size);
+        window.snapshot = await getDocs(window.lunesRef);
+        alert("Snapshot: "+ JSON.stringify(window.snapshot));
+        alert("Num de documentos: "+window.snapshot.size);
         // snapshot.forEach(doc => {
         //   alert("ID: " + doc.id + "\nDatos: " + JSON.stringify(doc.data()));
         // });
