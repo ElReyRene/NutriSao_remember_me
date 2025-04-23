@@ -477,7 +477,7 @@
       alert("Ejecutando acción de botón");
       alert("Email"+window.email);
       alert("Datos: "+window.db);
-      const lunesRef = collection(window.db, "usuarios", window.email, "Lunes");
+      const lunesRef = collection(doc(window.db, "usuarios", window.email), "Lunes");
       alert("Referencia a Lunes: " + lunesRef.path);
 
       try {
