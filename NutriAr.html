@@ -159,7 +159,7 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
     const user = auth.currentUser;
-    let email=null;
+    const email= encodeURIComponent(user.email);
   
     onAuthStateChanged(auth, (user) => {
       if (user) {
