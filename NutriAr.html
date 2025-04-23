@@ -178,12 +178,13 @@
         // Obteniendo dato Lunes
         // Obteniendo dato Lunes
         const primerDoc = snapshot.docs[0];
+        alert(primerDoc.id);
         const data = primerDoc.data();
         // Accediendo a Comidas y Horarios
         // Accediendo a Comidas y Horarios
         // Accediendo a Comidas y Horarios
-        const comidas = datos.Comidas;
-        const horarios = datos.Horarios;
+        const comidas = data.Comidas;
+        const horarios = data.Horarios;
         // Alertas de los datos, alertaaaaaaaaaaa
         // Alertas de los datos, alertaaaaaaaaaaa
         alert("Comidas: " + JSON.stringify(comidas));
