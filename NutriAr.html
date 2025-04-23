@@ -164,11 +164,15 @@
       if (user) {
         window.email = encodeURIComponent(user.email);
         alert("Email obtenido:" + window.email);
-        window.lunesRef = collection(database, "usuarios", window.email, "Lunes");
-        alert("Se hizo lo de LunesRef");
-        const snapshot = await getDocs(window.lunesRef);
-        alert("LunesRef: "+ window.lunesRef.path);
 
+        // Paso 1: Obtener dato
+        // Paso 2: Poner botón
+        // Paso 3: Mandar la alerta al presionar el botón
+        
+        window.lunesRef = collection(database, "usuarios", window.email, "Lunes");
+        alert("LunesRef: "+ window.lunesRef.path);
+        const snapshot = await getDocs(window.lunesRef);
+        alert("Snapshot: "+snapshot)
         // Obteniendo dato Lunes
         const primerDoc = snapshot.docs[0];
         alert("Primer doc: "+primerDoc);
@@ -487,42 +491,6 @@
       circle.style.background = `conic-gradient(#4CAF50 0% ${percentage}%, #ccc ${percentage}% 100%)`;
     }
   </script>
-
-  <script type="module">
-    // Paso 1: Obtener dato
-    // Paso 2: Poner botón
-    // Paso 3: Mandar la alerta al presionar el botón
-
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById("btnObtener").addEventListener("click",obtenerDatos);
-    });
-
-    async function obtenerDatos(){
-      alert("Hola");
-      alert("Es esto... "+window.lunesRef);
-      alert("Ejecutando acción de botón");
-      alert("Email"+window.email);
-      alert("Obteniendo path...");
-      alert("Referencia a Lunes: " + window.lunesRef);
-
-      try {
-        const querySnapshot = await getDocs(lunesRef);
-        const primerDoc = querySnapshot.docs[0];
-        const data = primerDoc.data();
-        const comidas = Object.values(data.Comidas || {});
-        const primeraComida = comidas.length > 0 ? comidas[0] : "Sin datos";
-
-        alert("Primera comida del lunes: " + primeraComida);//Dato requerido para 1 contenedor
-        
-      } catch (error) {
-        alert("Error al obtener datos: " + error.message);
-      }
-      ;
-    }
-
-  </script>
-  
-
 </body>
 </html>
 
