@@ -165,6 +165,25 @@
         window.email = encodeURIComponent(user.email);
         alert("Email obtenido:" + window.email);
         window.lunesRef = collection(doc(database, "usuarios", window.email), "Lunes");
+        alert("LunesRef: "+ window.lunesRef);
+
+        // Obteniendo dato Lunes
+        const querySnapshot = getDocs(lunesRef);
+        const primerDoc = querySnapshot.docs[0];
+        const data = primerDoc.data();
+        const comidas = Object.values(data.Comidas || {});
+        let primeraComida;
+
+        if (comidas.length > 0) {
+          // Si hay al menos una comida en la lista, tomamos la primera
+          primeraComida = comidas[0];
+        } else {
+          // Si no hay comidas en la lista, ponemos un mensaje indicando que no hay datos
+          primeraComida = "Sin datos";
+        }
+
+        alert("Primera comida del lunes: " + primeraComida);//Dato requerido para 1 contenedor
+
         const links = document.querySelectorAll(".register-link");
         links.forEach(link => {
           link.href = `Register_screen.html?email=${window.email}`;
