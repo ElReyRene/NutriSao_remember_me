@@ -144,7 +144,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+    import { getFirestore, collection, getDoc,doc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyCH32pB5Dk7cqHkaTv4SpWCHFsFrSKX9Qw",
@@ -172,11 +172,11 @@
         // Esto hay que revisarlo
         // Esto hay que revisarlo
         // Esto hay que revisarlo
-        const docRef = doc(database,"usuarios",window.email,"Lunes","datosLunes");
+        const docRef = doc(database, "usuarios", window.email, "Lunes", "datosLunes");
         alert("Doc_referencia: "+docRef.path);
         const docSnap = await getDoc(docRef);
         alert("docSnapshot: "+ JSON.stringify(docSnap));
-        alert("Num de documentos: "+docSnap.size);
+        alert("Num de documentos: "+docSnap.exists());
         // Obteniendo dato Lunes
         // Obteniendo dato Lunes
         const data =docSnap.data();
