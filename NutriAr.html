@@ -187,8 +187,11 @@
         // Alertas de los datos, alertaaaaaaaaaaa
         alert("Comidas: " + JSON.stringify(comidas));
         alert("Horarios: " + JSON.stringify(horarios));
-        const comida1 = comidas["Comida 1"];
+        window.comida1 = comidas["Comida 1"];
         alert("Comida 1: " + comida1);
+        window.comida2 = comidas["Comida 2"];
+        window.comida3 = comidas["Comida 3"];
+        window.comida4 = comidas["Comida 4"];
       }
     });
   </script>
@@ -239,6 +242,25 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const comidasLunes = [
+        window.comida1 || "Comida 1 no disponible",
+        window.comida2 || "Comida 2 no disponible",
+        window.comida3 || "Comida 3 no disponible",
+        window.comida4 || "Comida 4 no disponible"
+      ];
+      const lunesSection = document.querySelector('.day-section[data-day="lunes"]');
+  
+      if (lunesSection) {
+        const mealBoxes = lunesSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasLunes[index];
+        });
+      }
+    });
+  </script>
 
   <!-- Puedes repetir esta sección para los demás días: Martes, Miércoles, etc. -->
   <!-- Día: Martes -->
