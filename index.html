@@ -90,9 +90,7 @@
         alert(`✅ Usuario creado con éxito: ${email}`);
 
         // Guarda el usuario en Firestore
-        await setDoc(doc(db, "usuarios", uid), {
-          correo: email,
-          fechaRegistro: new Date()
+        await setDoc(doc(db, "usuarios", email), {
         });
         // Solo si todo salió bien, redirige
         //window.location.href = "Register_screen.html";
