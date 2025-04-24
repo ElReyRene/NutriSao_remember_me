@@ -164,7 +164,7 @@
       if (user) {
         // encodeURIComponent
         window.email = user.email; 
-        alert("Email obtenido:" + window.email);
+        alert("Usuario identificado:" + window.email);
         // Paso 1: Obtener dato
         // Paso 2: Poner botón
         // Paso 3: Mandar la alerta al presionar el botón
@@ -173,25 +173,28 @@
         // Esto hay que revisarlo
         // Esto hay que revisarlo
         const docRef = doc(database, "usuarios", window.email, "Lunes", "datosLunes");
-        alert("Doc_referencia: "+docRef.path);
+        // alert("Doc_referencia: "+docRef.path);
         const docSnap = await getDoc(docRef);
-        alert("docSnapshot: "+ JSON.stringify(docSnap));
-        alert("Num de documentos: "+docSnap.exists());
+        // alert("docSnapshot: "+ JSON.stringify(docSnap));
+        // alert("Num de documentos: "+docSnap.exists());
         // Obteniendo dato Lunes
         // Obteniendo dato Lunes
         const data =docSnap.data();
-        alert("Datos: " + JSON.stringify(data));
+        // alert("Datos: " + JSON.stringify(data));
         const comidas = data.Comidas;
         const horarios = data.Horarios;
         // Alertas de los datos, alertaaaaaaaaaaa
         // Alertas de los datos, alertaaaaaaaaaaa
-        alert("Comidas: " + JSON.stringify(comidas));
-        alert("Horarios: " + JSON.stringify(horarios));
+        // alert("Comidas: " + JSON.stringify(comidas));
+        // alert("Horarios: " + JSON.stringify(horarios));
+        // Alertas de los datos, alertaaaaaaaaaaa
+        // Alertas de los datos, alertaaaaaaaaaaa
         window.comida1 = comidas["Comida 1"];
-        alert("Comida 1: " + comida1);
         window.comida2 = comidas["Comida 2"];
         window.comida3 = comidas["Comida 3"];
         window.comida4 = comidas["Comida 4"];
+        alert("Comida 1: " + window.comida1+ " Comida 2: "+ window.comida2 
+          + " Comida 3: "+ window.comida3+ " Comida 4: "+ window.comida4);
       }
     });
   </script>
@@ -246,10 +249,10 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const comidasLunes = [
-        window.comida1 || "Comida 1 no disponible",
-        window.comida2 || "Comida 2 no disponible",
-        window.comida3 || "Comida 3 no disponible",
-        window.comida4 || "Comida 4 no disponible"
+        window.comida1 , "Comida 1 no disponible",
+        window.comida2 , "Comida 2 no disponible",
+        window.comida3 , "Comida 3 no disponible",
+        window.comida4 , "Comida 4 no disponible"
       ];
       const lunesSection = document.querySelector('.day-section[data-day="lunes"]');
   
