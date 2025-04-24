@@ -164,7 +164,7 @@
       if (user) {
         // encodeURIComponent
         window.email = user.email; 
-        alert("Usuario identificado:" + window.email);
+        alert("✅ Usuario identificado:" + window.email);
         // Paso 1: Obtener dato
         // Paso 2: Poner botón
         // Paso 3: Mandar la alerta al presionar el botón
@@ -195,6 +195,7 @@
         window.comida4 = comidas["Comida 4"];
         alert("Comida 1: " + window.comida1+ " Comida 2: "+ window.comida2 
           + " Comida 3: "+ window.comida3+ " Comida 4: "+ window.comida4);
+        actualizarComidasLunes();
       }
     });
   </script>
@@ -247,12 +248,12 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    function actualizarComidasLunes(){
       const comidasLunes = [
-        window.comida1 , "Comida 1 no disponible",
-        window.comida2 , "Comida 2 no disponible",
-        window.comida3 , "Comida 3 no disponible",
-        window.comida4 , "Comida 4 no disponible"
+        window.comida1 || "Comida 1 no disponible",
+        window.comida2 || "Comida 2 no disponible",
+        window.comida3 || "Comida 3 no disponible",
+        window.comida4 || "Comida 4 no disponible"
       ];
       const lunesSection = document.querySelector('.day-section[data-day="lunes"]');
   
@@ -262,7 +263,7 @@
           box.textContent = comidasLunes[index];
         });
       }
-    });
+    };
   </script>
 
   <!-- Puedes repetir esta sección para los demás días: Martes, Miércoles, etc. -->
