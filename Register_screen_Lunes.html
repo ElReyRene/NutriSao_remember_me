@@ -76,10 +76,10 @@
   <h1>Horario</h1>
 
   <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
 
 
   <script>
@@ -155,8 +155,10 @@
         alert('Usuario no autenticado');
         return;
       }
+
+      const email = user.email
   
-      const email = user.email.replace('.', '_'); // evitar errores en Firestore con puntos
+      // const email = user.email.replace('.', '_'); // evitar errores en Firestore con puntos
   
       // Obtener los datos de los inputs
       const comidasInputs = document.querySelectorAll('input[type="text"]');
@@ -192,23 +194,24 @@
         db.collection("usuarios")
           .doc(email)
           .collection("Lunes")
-          .add(datos) // usa .add para generar un ID automático
+          .doc("datosLunes") 
+          .set(datos)
           .then(() => alert("Datos guardados correctamente en Firestore (Lunes)"))
           .catch((error) => console.error("Error al guardar en Firestore:", error));
         alert('Datos guardados, Lunes...');
       } else {
         alert('Guardado cancelado');
       }
+      window.location.href = "index.html"; // pantalla de login
     }
     // Asegura que el usuario esté autenticado
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         alert('Debes iniciar sesión primero');
-        window.location.href = "index.html"; // o tu pantalla de login
+        window.location.href = "index.html"; // pantalla de login
       }
     });
   </script>
-  
-    
+
 </body>
 </html>
