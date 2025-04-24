@@ -165,7 +165,6 @@
         // encodeURIComponent
         window.email = user.email; 
         alert("Email obtenido:" + window.email);
-
         // Paso 1: Obtener dato
         // Paso 2: Poner botón
         // Paso 3: Mandar la alerta al presionar el botón
@@ -173,28 +172,15 @@
         // Esto hay que revisarlo
         // Esto hay que revisarlo
         // Esto hay que revisarlo
-        window.lunesRef = collection(database, "usuarios", window.email, "Lunes");
-        // const lunesRef = collection(db, "usuarios", "gabmal_oficial@gmail.com", "Lunes");
-        // Esto hay que revisarlo
-        // Esto hay que revisarlo
-        // Esto hay que revisarlo
-
-        alert("LunesRef: "+ window.lunesRef.path);
-        const snapshot = await getDocs(window.lunesRef);
-        alert("Snapshot: "+ JSON.stringify(snapshot));
-        alert("Num de documentos: "+snapshot.size);
-        // snapshot.forEach(doc => {
-        //   alert("ID: " + doc.id + "\nDatos: " + JSON.stringify(doc.data()));
-        // });
+        const docRef = doc(database,"usuarios",window.email,"Lunes","datosLunes");
+        alert("Doc_referencia"+JSON.stringify(docRef));
+        const docSnap = await getDoc(docRef);
+        alert("docSnapshot: "+ JSON.stringify(docSnap));
+        alert("Num de documentos: "+docSnap.size);
         // Obteniendo dato Lunes
         // Obteniendo dato Lunes
-        // Obteniendo dato Lunes
-        const primerDoc = snapshot.docs[0];
-        alert("ID del primerDoc: "+primerDoc.id);
-        const data = primerDoc.data();
-        // Accediendo a Comidas y Horarios
-        // Accediendo a Comidas y Horarios
-        // Accediendo a Comidas y Horarios
+        const data =docSnap.data();
+        alert("Datos: " + JSON.stringify(data));
         const comidas = data.Comidas;
         const horarios = data.Horarios;
         // Alertas de los datos, alertaaaaaaaaaaa

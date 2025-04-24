@@ -187,13 +187,12 @@
       // Confirmación del usuario
       if (window.confirm("¿Estás seguro de que quieres guardar estos datos?")) {
         const db = firebase.firestore();
+        const docRef=db.collection("usuarios").doc(email).collection("Lunes").doc("datosLunes");
   
-        db.collection("usuarios")
-          .doc(email)
-          .collection("Lunes")
-          .add(datos) // usa .add para generar un ID automático
-          .then(() => alert("Datos guardados correctamente en Firestore (Lunes)"))
-          .catch((error) => console.error("Error al guardar en Firestore:", error));
+        docRef.set(datos)
+          .then(()=>alert("Datos guardados correctamente en Firestore"))
+          .catch((error) => console.error("Error al guardarlo :",error));
+          
         alert('Datos guardados, Lunes...');
       } else {
         alert('Guardado cancelado');
