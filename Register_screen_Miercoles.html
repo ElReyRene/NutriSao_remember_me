@@ -76,10 +76,10 @@
   <h1>Horario</h1>
 
   <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
 
 
   <script>
@@ -91,6 +91,7 @@
       storageBucket: "nutrisaoapp.firebasestorage.app",
       messagingSenderId: "508649226829",
       appId: "1:508649226829:web:cfa0f7c95da012ff2f9204",
+      databaseURL: "https://nutrisaoapp-default-rtdb.firebaseio.com" // <- AGREGAR ESTO
     };
 
     // Inicializa Firebase
@@ -191,24 +192,24 @@
         db.collection("usuarios")
           .doc(email)
           .collection("Miercoles")
-          .add(datos) // usa .add para generar un ID automático
-          .then(() => alert("Datos guardados correctamente en Firestore (Miercoles)"))
+          .doc("datosMiercoles") 
+          .set(datos)
+          .then(() => alert("Datos guardados correctamente en Firestore (Miércoles)"))
           .catch((error) => console.error("Error al guardar en Firestore:", error));
-        alert('Datos guardados, Miercoles...');
+        alert('Datos guardados, Miércoles...');
       } else {
         alert('Guardado cancelado');
       }
-      window.location.href = "NutriAr.html";
+      window.location.href = "index.html"; // pantalla de login
     }
     // Asegura que el usuario esté autenticado
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         alert('Debes iniciar sesión primero');
-        window.location.href = "index.html"; // o tu pantalla de login
+        window.location.href = "index.html"; // pantalla de login
       }
     });
   </script>
-  
-    
+
 </body>
 </html>

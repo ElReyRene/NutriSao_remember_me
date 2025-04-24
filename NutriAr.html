@@ -173,7 +173,7 @@
         // Esto hay que revisarlo
         // Esto hay que revisarlo
         const docRef = doc(database,"usuarios",window.email,"Lunes","datosLunes");
-        alert("Doc_referencia"+JSON.stringify(docRef));
+        alert("Doc_referencia: "+JSON.stringify(docRef));
         const docSnap = await getDoc(docRef);
         alert("docSnapshot: "+ JSON.stringify(docSnap));
         alert("Num de documentos: "+docSnap.size);

@@ -91,6 +91,7 @@
       storageBucket: "nutrisaoapp.firebasestorage.app",
       messagingSenderId: "508649226829",
       appId: "1:508649226829:web:cfa0f7c95da012ff2f9204",
+      databaseURL: "https://nutrisaoapp-default-rtdb.firebaseio.com" // <- AGREGAR ESTO
     };
 
     // Inicializa Firebase
@@ -191,25 +192,24 @@
         db.collection("usuarios")
           .doc(email)
           .collection("Martes")
-          .add(datos) // usa .add para generar un ID automático
+          .doc("datosMartes") 
+          .set(datos)
           .then(() => alert("Datos guardados correctamente en Firestore (Martes)"))
           .catch((error) => console.error("Error al guardar en Firestore:", error));
         alert('Datos guardados, Martes...');
       } else {
         alert('Guardado cancelado');
       }
-      window.location.href = "NutriAr.html";
+      window.location.href = "index.html"; // pantalla de login
     }
     // Asegura que el usuario esté autenticado
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         alert('Debes iniciar sesión primero');
-        window.location.href = "index.html"; // o tu pantalla de login
+        window.location.href = "index.html"; // pantalla de login
       }
     });
   </script>
-  
-    
+
 </body>
 </html>
-
