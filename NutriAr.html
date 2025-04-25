@@ -140,6 +140,9 @@
   </style>
 
   <!-- Firebase -->
+  <!-- Firebase -->
+  <!-- Firebase -->
+  <!-- Firebase -->
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
@@ -169,17 +172,39 @@
         // Paso 2: Poner botón
         // Paso 3: Mandar la alerta al presionar el botón
         
-        // Esto hay que revisarlo
-        // Esto hay que revisarlo
-        // Esto hay que revisarlo
+        // Obteniendo datos de base de datos
+        // Obteniendo datos de base de datos
+        // Obteniendo datos de base de datos
+        // Obteniendo datos de base de datos
+
         const docRef = doc(database, "usuarios", window.email, "Lunes", "datosLunes");
-        // alert("Doc_referencia: "+docRef.path);
+        // const docRefM = doc(database, "usuarios", window.email, "Martes", "datosMartes");
+        // const docRefMi = doc(database, "usuarios", window.email, "Miercoles", "datosMiercoles");
+	      // const docRefJ = doc(database, "usuarios", window.email, "Jueves", "datosJueves");
+        // const docRefV = doc(database, "usuarios", window.email, "Viernes", "datosViernes");
+	      // const docRefS = doc(database, "usuarios", window.email, "Sabado", "datosSabado");
+        // const docRefD = doc(database, "usuarios", window.email, "Domingo", "datosDomingo");
+
+        // Obteniendo Snapshot
+
         const docSnap = await getDoc(docRef);
-        // alert("docSnapshot: "+ JSON.stringify(docSnap));
-        // alert("Num de documentos: "+docSnap.exists());
+        // const docSnapM = await getDoc(docRefM);
+        // const docSnapMi = await getDoc(docRefMi);
+        // const docSnapJ = await getDoc(docRefJ);
+        // const docSnapV = await getDoc(docRefV);
+        // const docSnapS = await getDoc(docRefS);
+        // const docSnapD = await getDoc(docRefD);
+
         // Obteniendo dato Lunes
         // Obteniendo dato Lunes
         const data =docSnap.data();
+        // const dataM = docSnapM.data();
+        // const dataMi = docSnapMi.data();
+        // const dataJ = docSnapJ.data();
+        // const dataV = docSnapV.data();
+        // const dataS = docSnapS.data();
+        // const dataD = docSnapD.data();
+
         // alert("Datos: " + JSON.stringify(data));
         const comidas = data.Comidas;
         const horarios = data.Horarios;
@@ -193,8 +218,17 @@
         window.comida2 = comidas["Comida 2"];
         window.comida3 = comidas["Comida 3"];
         window.comida4 = comidas["Comida 4"];
+
+        window.horario1 = horarios["Horario 1"];
+        window.horario2 = horarios["Horario 2"];
+        window.horario3 = horarios["Horario 3"];
+        window.horario4 = horarios["Horario 4"];
+
         alert("Comida 1: " + window.comida1+ " Comida 2: "+ window.comida2 
           + " Comida 3: "+ window.comida3+ " Comida 4: "+ window.comida4);
+        
+        alert("Horario 1: " + window.horario1+ " Horario 2: "+ window.horario2 
+          + " Horario 3: "+ window.horario3+ " Horario 4: "+ window.horario4);
         actualizarComidasLunes();
       }
     });
@@ -208,10 +242,11 @@
   <h1>NutriAr</h1>
   <div class="subtitle">Hola, bienvenido a tu recordatorio de confianza</div>
 
-  <!-- Aquí van los días, ya organizados, con "jueves" corregido -->
-  <!-- Puedes dejar el resto del contenido igual, o agregar más días -->
-
   <!-- Día: Lunes -->
+  <!-- Día: Lunes -->
+  <!-- Día: Lunes -->
+  <!-- Día: Lunes -->
+
   <div class="day-section" data-day="lunes">
     <!-- Título del día y enlace a la cuenta -->
     <div class="day-title" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
@@ -250,10 +285,10 @@
   <script>
     function actualizarComidasLunes(){
       const comidasLunes = [
-        window.comida1 || "Comida 1 no disponible",
-        window.comida2 || "Comida 2 no disponible",
-        window.comida3 || "Comida 3 no disponible",
-        window.comida4 || "Comida 4 no disponible"
+        window.comida1 + window.horario1 || "Comida 1 no disponible",
+        window.comida2 + window.horario2 || "Comida 2 no disponible",
+        window.comida3 + window.horario3 || "Comida 3 no disponible",
+        window.comida4 + window.horario4 || "Comida 4 no disponible"
       ];
       const lunesSection = document.querySelector('.day-section[data-day="lunes"]');
   
@@ -266,8 +301,11 @@
     };
   </script>
 
-  <!-- Puedes repetir esta sección para los demás días: Martes, Miércoles, etc. -->
   <!-- Día: Martes -->
+  <!-- Día: Martes -->
+  <!-- Día: Martes -->
+  <!-- Día: Martes -->
+   
   <div class="day-section" data-day="martes">
     <!-- Título del día y enlace a la cuenta -->
     <div class="day-title" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
@@ -304,7 +342,30 @@
     </div>
   </div>
 
+  <!-- <script>
+    function actualizarComidasMartes(){
+      const comidasMartes = [
+        window.comida1 || "Comida 1 no disponible",
+        window.comida2 || "Comida 2 no disponible",
+        window.comida3 || "Comida 3 no disponible",
+        window.comida4 || "Comida 4 no disponible"
+      ];
+      const martesSection = document.querySelector('.day-section[data-day="martes"]');
+  
+      if (martesSection) {
+        const mealBoxes = martesSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasMartes[index];
+        });
+      }
+    };
+  </script> -->
+
   <!-- Día: Miércoles -->
+  <!-- Día: Miércoles -->
+  <!-- Día: Miércoles -->
+  <!-- Día: Miércoles -->
+
   <div class="day-section" data-day="miercoles">
     <!-- Título del día y enlace a la cuenta -->
     <div class="day-title" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
@@ -340,83 +401,149 @@
     </div>
   </div>
 
-  <!-- Puedes repetir esta sección para los demás días: Martes, Miércoles, etc. -->
-    <!-- Día: Jueves -->
-    <div class="day-section" data-day="jueves">
-        <!-- Título del día y enlace a la cuenta -->
-        <div class="day-title" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-            <a href="Register_screen_Jueves.html" class="register-icon-link">📝</a>
-            <span>Jueves</span>
-        </div>
-      
-        <!-- Contenedor de comidas -->
-        <div class="meals-container">
-          <div class="meal-list">
-            <div class="meal-item">
-              <div class="meal-box"></div>
-              <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
-            </div>
-            <div class="meal-item">
-              <div class="meal-box"></div>
-              <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
-            </div>
-            <div class="meal-item">
-              <div class="meal-box"></div>
-              <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
-            </div>
-            <div class="meal-item">
-              <div class="meal-box"></div>
-              <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
-            </div>
-          </div>
-      
-          <!-- Contenedor del progreso -->
-          <div class="progress-wrapper">
-            <div class="progress-circle"></div>
-          </div>
-        </div>
-      </div>
+  <!-- <script>
+    function actualizarComidasMiercoles(){
+      const comidasMiercoles = [
+        window.comida1 || "Comida 1 no disponible",
+        window.comida2 || "Comida 2 no disponible",
+        window.comida3 || "Comida 3 no disponible",
+        window.comida4 || "Comida 4 no disponible"
+      ];
+      const miercolesSection = document.querySelector('.day-section[data-day="miercoles"]');
+  
+      if (miercolesSection) {
+        const mealBoxes = miercolesSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasMiercoles[index];
+        });
+      }
+    };
+  </script> -->
 
-  <!-- Puedes repetir esta sección para los demás días: Martes, Miércoles, etc. -->
-    <!-- Día: Viernes -->
-    <div class="day-section" data-day="viernes">
-        <!-- Título del día y enlace a la cuenta -->
-        <div class="day-title" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-            <a href="Register_screen_Viernes.html" class="register-icon-link">📝</a>
-            <span>Viernes</span>
+  <!-- Día: Jueves -->
+  <!-- Día: Jueves -->
+  <!-- Día: Jueves -->
+  <!-- Día: Jueves -->
+
+  <div class="day-section" data-day="jueves">
+    <!-- Título del día y enlace a la cuenta -->
+    <div class="day-title" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <a href="Register_screen_Jueves.html" class="register-icon-link">📝</a>
+        <span>Jueves</span>
+    </div>
+  
+    <!-- Contenedor de comidas -->
+    <div class="meals-container">
+      <div class="meal-list">
+        <div class="meal-item">
+          <div class="meal-box"></div>
+          <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
         </div>
-      
-        <!-- Contenedor de comidas -->
-        <div class="meals-container">
-          <div class="meal-list">
-            <div class="meal-item">
-              <div class="meal-box"></div>
-              <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
-            </div>
-            <div class="meal-item">
-              <div class="meal-box"></div>
-              <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
-            </div>
-            <div class="meal-item">
-              <div class="meal-box"></div>
-              <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
-            </div>
-            <div class="meal-item">
-              <div class="meal-box"></div>
-              <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
-            </div>
-          </div>
-      
-          <!-- Contenedor del progreso -->
-          <div class="progress-wrapper">
-            <div class="progress-circle"></div>
-          </div>
+        <div class="meal-item">
+          <div class="meal-box"></div>
+          <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
+        </div>
+        <div class="meal-item">
+          <div class="meal-box"></div>
+          <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
+        </div>
+        <div class="meal-item">
+          <div class="meal-box"></div>
+          <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
         </div>
       </div>
+  
+      <!-- Contenedor del progreso -->
+      <div class="progress-wrapper">
+        <div class="progress-circle"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script>
+    function actualizarComidasJueves(){
+      const comidasJueves = [
+        window.comida1 || "Comida 1 no disponible",
+        window.comida2 || "Comida 2 no disponible",
+        window.comida3 || "Comida 3 no disponible",
+        window.comida4 || "Comida 4 no disponible"
+      ];
+      const juevesSection = document.querySelector('.day-section[data-day="jueves"]');
+  
+      if (juevesSection) {
+        const mealBoxes = juevesSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasJueves[index];
+        });
+      }
+    };
+  </script> -->
+
+
+  <!-- Día: Viernes -->
+  <!-- Día: Viernes -->
+  <!-- Día: Viernes -->
+  <!-- Día: Viernes -->
+
+  <div class="day-section" data-day="viernes">
+    <!-- Título del día y enlace a la cuenta -->
+    <div class="day-title" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <a href="Register_screen_Viernes.html" class="register-icon-link">📝</a>
+        <span>Viernes</span>
+    </div>
+  
+    <!-- Contenedor de comidas -->
+    <div class="meals-container">
+      <div class="meal-list">
+        <div class="meal-item">
+          <div class="meal-box"></div>
+          <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
+        </div>
+        <div class="meal-item">
+          <div class="meal-box"></div>
+          <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
+        </div>
+        <div class="meal-item">
+          <div class="meal-box"></div>
+          <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
+        </div>
+        <div class="meal-item">
+          <div class="meal-box"></div>
+          <input type="checkbox" class="checkbox" onchange="updateCircle(this)">
+        </div>
+      </div>
+  
+      <!-- Contenedor del progreso -->
+      <div class="progress-wrapper">
+        <div class="progress-circle"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script>
+    function actualizarComidasViernes(){
+      const comidasViernes = [
+        window.comida1 || "Comida 1 no disponible",
+        window.comida2 || "Comida 2 no disponible",
+        window.comida3 || "Comida 3 no disponible",
+        window.comida4 || "Comida 4 no disponible"
+      ];
+      const viernesSection = document.querySelector('.day-section[data-day="viernes"]');
+  
+      if (viernesSection) {
+        const mealBoxes = viernesSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasViernes[index];
+        });
+      }
+    };
+  </script> -->
     
-      <!-- Puedes repetir esta sección para los demás días: Martes, Miércoles, etc. -->
-
   <!-- Día: Sábado -->
+  <!-- Día: Sábado -->
+  <!-- Día: Sábado -->
+  <!-- Día: Sábado -->
+
   <div class="day-section" data-day="sabado">
     <!-- Título del día y enlace a la cuenta -->
     <div class="day-title" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
@@ -452,9 +579,31 @@
     </div>
   </div>
 
-  <!-- Puedes repetir esta sección para los demás días: Martes, Miércoles, etc. -->
+  <!-- <script>
+    function actualizarComidasSabado(){
+      const comidasSabado = [
+        window.comida1 || "Comida 1 no disponible",
+        window.comida2 || "Comida 2 no disponible",
+        window.comida3 || "Comida 3 no disponible",
+        window.comida4 || "Comida 4 no disponible"
+      ];
+      const sabadoSection = document.querySelector('.day-section[data-day="sabado"]');
+  
+      if (sabadoSection) {
+        const mealBoxes = sabadoSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasSabado[index];
+        });
+      }
+    };
+  </script> -->
+
 
   <!-- Día: Domingo -->
+  <!-- Día: Domingo -->
+  <!-- Día: Domingo -->
+  <!-- Día: Domingo -->
+
   <div class="day-section" data-day="domingo">
     <!-- Título del día y enlace a la cuenta -->
     <div class="day-title" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
@@ -490,7 +639,29 @@
     </div>
   </div>
 
-  <!-- Puedes repetir esta sección para los demás días: Martes, Miércoles, etc. -->
+  <!-- <script>
+    function actualizarComidasDomingo(){
+      const comidasDomingo = [
+        window.comida1 || "Comida 1 no disponible",
+        window.comida2 || "Comida 2 no disponible",
+        window.comida3 || "Comida 3 no disponible",
+        window.comida4 || "Comida 4 no disponible"
+      ];
+      const domingoSection = document.querySelector('.day-section[data-day="domingo"]');
+  
+      if (domingoSection) {
+        const mealBoxes = domingoSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasDomingo[index];
+        });
+      }
+    };
+  </script> -->
+
+  <!-- Updates de los circulos -->
+  <!-- Updates de los circulos -->
+  <!-- Updates de los circulos -->
+  <!-- Updates de los circulos -->
 
   <script>
     function updateCircle(checkbox) {
