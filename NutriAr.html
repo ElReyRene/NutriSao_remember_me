@@ -181,106 +181,53 @@
         // Obteniendo datos de base de datos
         // Obteniendo datos de base de datos
 
-        const docRef = doc(database, "usuarios", window.email, "Lunes", "datosLunes");
-        const docRefM = doc(database, "usuarios", window.email, "Martes", "datosMartes");
-        const docRefMi = doc(database, "usuarios", window.email, "Miercoles", "datosMiercoles");
-	      const docRefJ = doc(database, "usuarios", window.email, "Jueves", "datosJueves");
-        const docRefV = doc(database, "usuarios", window.email, "Viernes", "datosViernes");
-	      const docRefS = doc(database, "usuarios", window.email, "Sabado", "datosSabado");
-        const docRefD = doc(database, "usuarios", window.email, "Domingo", "datosDomingo");
-
-        // Obteniendo Snapshot
-
-        const docSnap = await getDoc(docRef);
-        const docSnapM = await getDoc(docRefM);
-        const docSnapMi = await getDoc(docRefMi);
-        const docSnapJ = await getDoc(docRefJ);
-        const docSnapV = await getDoc(docRefV);
-        const docSnapS = await getDoc(docRefS);
-        const docSnapD = await getDoc(docRefD);
-
-        // Obteniendo dato Lunes
-        // Obteniendo dato Lunes
-        const data =docSnap.data();
-        const dataM = docSnapM.data();
-        const dataMi = docSnapMi.data();
-        const dataJ = docSnapJ.data();
-        const dataV = docSnapV.data();
-        const dataS = docSnapS.data();
-        const dataD = docSnapD.data();
-
-        // alert("Datos: " + JSON.stringify(data));
-
-        // Datos... Horarios y Comidas
-        // Datos... Horarios y Comidas
-        // Datos... Horarios y Comidas
-
-        const comidas = data.Comidas;
-        const horarios = data.Horarios;
-
-        const comidasM = dataM.Comidas;
-        const horariosM = dataM.Horarios;
-
-        const comidasMi = dataMi.Comidas;
-        const horariosMi = dataMi.Horarios;
-
-        const comidasJ = dataJ.Comidas;
-        const horariosJ = dataJ.Horarios;
-
-        const comidasV = dataV.Comidas;
-        const horariosV = dataV.Horarios;
-
-        const comidasS = dataS.Comidas;
-        const horariosS = dataS.Horarios;
-
-        const comidasD = dataD.Comidas;
-        const horariosD = dataD.Horarios;
         
-        // Conversión de horas
-        // Conversión de horas
-        // Conversión de horas
-
-        const convertirHorario = (timestamp) => {
-          if (!timestamp?.toDate) return "Hora inválida";
-          const date = timestamp.toDate();
-          const horas = date.getHours().toString().padStart(2, '0');
-          const minutos = date.getMinutes().toString().padStart(2, '0');
-          return `${horas}:${minutos}`;
-        };
-
-        // Conversión de horas
-        // Conversión de horas
-        // Conversión de horas
-
         // ¿Qué le pasó a Lunes?
         // ¿Qué le pasó a Lunes?
         // ¿Qué le pasó a Lunes?
 
-        // .....CONSTANTES UTILIZADAS....
-        // const comidas = data.Comidas;
-        // const horarios = data.Horarios;
+        try{
+          const docRef = doc(database, "usuarios", window.email, "Lunes", "datosLunes");
+          const docSnap = await getDoc(docRef);
+          const data =docSnap.data();
+          const comidas = data.Comidas;
+          const horarios = data.Horarios;
 
-        window.comida1 = comidas["Comida 1"];
-        window.comida2 = comidas["Comida 2"];
-        window.comida3 = comidas["Comida 3"];
-        window.comida4 = comidas["Comida 4"];
+          const convertirHorario = (timestamp) => {
+            if (!timestamp?.toDate) return "Hora inválida";
+            const date = timestamp.toDate();
+            const horas = date.getHours().toString().padStart(2, '0');
+            const minutos = date.getMinutes().toString().padStart(2, '0');
+            return `${horas}:${minutos}`;
+          };
 
-        
-        window.horario1 = convertirHorario(horarios["Horario 1"]);
-        window.horario2 = convertirHorario(horarios["Horario 2"]);
-        window.horario3 = convertirHorario(horarios["Horario 3"]);
-        window.horario4 = convertirHorario(horarios["Horario 4"]);
+          // .....CONSTANTES UTILIZADAS....
+          // const comidas = data.Comidas;
+          // const horarios = data.Horarios;
 
-        alert("Lunes... Comida 1: " + window.comida1+ " Comida 2: "+ window.comida2 
-          + " Comida 3: "+ window.comida3+ " Comida 4: "+ window.comida4);
+          window.comida1 = comidas["Comida 1"];
+          window.comida2 = comidas["Comida 2"];
+          window.comida3 = comidas["Comida 3"];
+          window.comida4 = comidas["Comida 4"];
 
-        // alert("🕐 Horario 1: " + window.horario1 + 
-        //     "\n🕐 Horario 2: " + window.horario2 + 
-        //     "\n🕐 Horario 3: " + window.horario3 + 
-        //     "\n🕐 Horario 4: " + window.horario4);
+          
+          window.horario1 = convertirHorario(horarios["Horario 1"]);
+          window.horario2 = convertirHorario(horarios["Horario 2"]);
+          window.horario3 = convertirHorario(horarios["Horario 3"]);
+          window.horario4 = convertirHorario(horarios["Horario 4"]);
 
-        actualizarComidasLunes();
-        
+          alert("Lunes... Comida 1: " + window.comida1+ " Comida 2: "+ window.comida2 
+            + " Comida 3: "+ window.comida3+ " Comida 4: "+ window.comida4);
+
+          // alert("🕐 Horario 1: " + window.horario1 + 
+          //     "\n🕐 Horario 2: " + window.horario2 + 
+          //     "\n🕐 Horario 3: " + window.horario3 + 
+          //     "\n🕐 Horario 4: " + window.horario4);
+
+          actualizarComidasLunes();
+        } catch(error){
+          alert("Paso al catch");
+        }
         
         // ¿Qué le pasó a Martes?
         // ¿Qué le pasó a Martes?
@@ -289,6 +236,19 @@
         // .....CONSTANTES UTILIZADAS....
         // const comidasM = dataM.Comidas;
         // const horariosM = dataM.Horarios;
+        const docRefM = doc(database, "usuarios", window.email, "Martes", "datosMartes");
+        const docSnapM = await getDoc(docRefM);
+        const dataM = docSnapM.data();
+        const comidasM = dataM.Comidas;
+        const horariosM = dataM.Horarios;
+
+        const convertirHorarioM = (timestamp) => {
+          if (!timestamp?.toDate) return "Hora inválida";
+          const date = timestamp.toDate();
+          const horas = date.getHours().toString().padStart(2, '0');
+          const minutos = date.getMinutes().toString().padStart(2, '0');
+          return `${horas}:${minutos}`;
+        };
 
         window.comida1M = comidasM["Comida 1"];
         window.comida2M = comidasM["Comida 2"];
@@ -296,10 +256,10 @@
         window.comida4M = comidasM["Comida 4"];
 
         
-        window.horario1M = convertirHorario(horariosM["Horario 1"]);
-        window.horario2M = convertirHorario(horariosM["Horario 2"]);
-        window.horario3M = convertirHorario(horariosM["Horario 3"]);
-        window.horario4M = convertirHorario(horariosM["Horario 4"]);
+        window.horario1M = convertirHorarioM(horariosM["Horario 1"]);
+        window.horario2M = convertirHorarioM(horariosM["Horario 2"]);
+        window.horario3M = convertirHorarioM(horariosM["Horario 3"]);
+        window.horario4M = convertirHorarioM(horariosM["Horario 4"]);
 
         alert("Martes... Comida 1: " + window.comida1M+ " Comida 2: "+ window.comida2M 
           + " Comida 3: "+ window.comida3M+ " Comida 4: "+ window.comida4M);
@@ -313,17 +273,30 @@
         // .....CONSTANTES UTILIZADAS....
         // const comidasMi = dataMi.Comidas;
         // const horariosMi = dataMi.Horarios;
+        const docRefMi = doc(database, "usuarios", window.email, "Miercoles", "datosMiercoles");
+        const docSnapMi = await getDoc(docRefMi);
+        const dataMi = docSnapMi.data();
+        const comidasMi = dataMi.Comidas;
+        const horariosMi = dataMi.Horarios;
 
         window.comida1Mi = comidasMi["Comida 1"];
         window.comida2Mi = comidasMi["Comida 2"];
         window.comida3Mi = comidasMi["Comida 3"];
         window.comida4Mi = comidasMi["Comida 4"];
 
+        const convertirHorarioMi = (timestamp) => {
+          if (!timestamp?.toDate) return "Hora inválida";
+          const date = timestamp.toDate();
+          const horas = date.getHours().toString().padStart(2, '0');
+          const minutos = date.getMinutes().toString().padStart(2, '0');
+          return `${horas}:${minutos}`;
+        };
+
         
-        window.horario1Mi = convertirHorario(horariosMi["Horario 1"]);
-        window.horario2Mi = convertirHorario(horariosMi["Horario 2"]);
-        window.horario3Mi = convertirHorario(horariosMi["Horario 3"]);
-        window.horario4Mi = convertirHorario(horariosMi["Horario 4"]);
+        window.horario1Mi = convertirHorarioMi(horariosMi["Horario 1"]);
+        window.horario2Mi = convertirHorarioMi(horariosMi["Horario 2"]);
+        window.horario3Mi = convertirHorarioMi(horariosMi["Horario 3"]);
+        window.horario4Mi = convertirHorarioMi(horariosMi["Horario 4"]);
 
         alert("Miercoles... Comida 1: " + window.comida1Mi+ " Comida 2: "+ window.comida2Mi
           + " Comida 3: "+ window.comida3Mi+ " Comida 4: "+ window.comida4Mi);
@@ -337,17 +310,29 @@
         // .....CONSTANTES UTILIZADAS....
         // const comidasJ = dataJ.Comidas;
         // const horariosJ = dataJ.Horarios;
+	      const docRefJ = doc(database, "usuarios", window.email, "Jueves", "datosJueves");
+        const docSnapJ = await getDoc(docRefJ);
+        const dataJ = docSnapJ.data();
+        const comidasJ = dataJ.Comidas;
+        const horariosJ = dataJ.Horarios;
 
         window.comida1J = comidasJ["Comida 1"];
         window.comida2J = comidasJ["Comida 2"];
         window.comida3J = comidasJ["Comida 3"];
         window.comida4J = comidasJ["Comida 4"];
 
-        
-        window.horario1J = convertirHorario(horariosJ["Horario 1"]);
-        window.horario2J = convertirHorario(horariosJ["Horario 2"]);
-        window.horario3J = convertirHorario(horariosJ["Horario 3"]);
-        window.horario4J = convertirHorario(horariosJ["Horario 4"]);
+        const convertirHorarioJ = (timestamp) => {
+          if (!timestamp?.toDate) return "Hora inválida";
+          const date = timestamp.toDate();
+          const horas = date.getHours().toString().padStart(2, '0');
+          const minutos = date.getMinutes().toString().padStart(2, '0');
+          return `${horas}:${minutos}`;
+        };
+
+        window.horario1J = convertirHorarioJ(horariosJ["Horario 1"]);
+        window.horario2J = convertirHorarioJ(horariosJ["Horario 2"]);
+        window.horario3J = convertirHorarioJ(horariosJ["Horario 3"]);
+        window.horario4J = convertirHorarioJ(horariosJ["Horario 4"]);
 
         alert("Jueves... Comida 1: " + window.comida1J+ " Comida 2: "+ window.comida2J 
           + " Comida 3: "+ window.comida3J+ " Comida 4: "+ window.comida4J);
@@ -361,17 +346,29 @@
         // .....CONSTANTES UTILIZADAS....
         // const comidasV = dataV.Comidas;
         // const horariosV = dataV.Horarios;
+        const docRefV = doc(database, "usuarios", window.email, "Viernes", "datosViernes");
+        const docSnapV = await getDoc(docRefV);
+        const dataV = docSnapV.data();
+        const comidasV = dataV.Comidas;
+        const horariosV = dataV.Horarios;
 
         window.comida1V = comidasV["Comida 1"];
         window.comida2V = comidasV["Comida 2"];
         window.comida3V = comidasV["Comida 3"];
         window.comida4V = comidasV["Comida 4"];
 
+        const convertirHorarioV = (timestamp) => {
+          if (!timestamp?.toDate) return "Hora inválida";
+          const date = timestamp.toDate();
+          const horas = date.getHours().toString().padStart(2, '0');
+          const minutos = date.getMinutes().toString().padStart(2, '0');
+          return `${horas}:${minutos}`;
+        };
         
-        window.horario1V = convertirHorario(horariosV["Horario 1"]);
-        window.horario2V = convertirHorario(horariosV["Horario 2"]);
-        window.horario3V = convertirHorario(horariosV["Horario 3"]);
-        window.horario4V = convertirHorario(horariosV["Horario 4"]);
+        window.horario1V = convertirHorarioV(horariosV["Horario 1"]);
+        window.horario2V = convertirHorarioV(horariosV["Horario 2"]);
+        window.horario3V = convertirHorarioV(horariosV["Horario 3"]);
+        window.horario4V = convertirHorarioV(horariosV["Horario 4"]);
 
         alert("viernes... Comida 1: " + window.comida1V+ " Comida 2: "+ window.comida2V 
           + " Comida 3: "+ window.comida3V+ " Comida 4: "+ window.comida4V);
@@ -385,17 +382,30 @@
         // .....CONSTANTES UTILIZADAS....
         // const comidasS = dataS.Comidas;
         // const horariosS = dataS.Horarios;
+        
+	      const docRefS = doc(database, "usuarios", window.email, "Sabado", "datosSabado");
+        const docSnapS = await getDoc(docRefS);
+        const dataS = docSnapS.data();
+        const comidasS = dataS.Comidas;
+        const horariosS = dataS.Horarios;
 
         window.comida1S = comidasS["Comida 1"];
         window.comida2S = comidasS["Comida 2"];
         window.comida3S = comidasS["Comida 3"];
         window.comida4S = comidasS["Comida 4"];
 
+        const convertirHorarioS = (timestamp) => {
+          if (!timestamp?.toDate) return "Hora inválida";
+          const date = timestamp.toDate();
+          const horas = date.getHours().toString().padStart(2, '0');
+          const minutos = date.getMinutes().toString().padStart(2, '0');
+          return `${horas}:${minutos}`;
+        };
         
-        window.horario1S = convertirHorario(horariosS["Horario 1"]);
-        window.horario2S = convertirHorario(horariosS["Horario 2"]);
-        window.horario3S = convertirHorario(horariosS["Horario 3"]);
-        window.horario4S = convertirHorario(horariosS["Horario 4"]);
+        window.horario1S = convertirHorarioS(horariosS["Horario 1"]);
+        window.horario2S = convertirHorarioS(horariosS["Horario 2"]);
+        window.horario3S = convertirHorarioS(horariosS["Horario 3"]);
+        window.horario4S = convertirHorarioS(horariosS["Horario 4"]);
 
         alert("Sabado... Comida 1: " + window.comida1S+ " Comida 2: "+ window.comida2S 
           + " Comida 3: "+ window.comida3S+ " Comida 4: "+ window.comida4S);
@@ -409,17 +419,29 @@
         // .....CONSTANTES UTILIZADAS....
         // const comidasD = dataD.Comidas;
         // const horariosD = dataD.Horarios;
+        const docRefD = doc(database, "usuarios", window.email, "Domingo", "datosDomingo");
+        const docSnapD = await getDoc(docRefD);
+        const dataD = docSnapD.data();
+        const comidasD = dataD.Comidas;
+        const horariosD = dataD.Horarios;
 
         window.comida1D = comidasD["Comida 1"];
         window.comida2D = comidasD["Comida 2"];
         window.comida3D = comidasD["Comida 3"];
         window.comida4D = comidasD["Comida 4"];
 
+        const convertirHorarioD = (timestamp) => {
+          if (!timestamp?.toDate) return "Hora inválida";
+          const date = timestamp.toDate();
+          const horas = date.getHours().toString().padStart(2, '0');
+          const minutos = date.getMinutes().toString().padStart(2, '0');
+          return `${horas}:${minutos}`;
+        };
         
-        window.horario1D = convertirHorario(horariosD["Horario 1"]);
-        window.horario2D = convertirHorario(horariosD["Horario 2"]);
-        window.horario3D = convertirHorario(horariosD["Horario 3"]);
-        window.horario4D = convertirHorario(horariosD["Horario 4"]);
+        window.horario1D = convertirHorarioD(horariosD["Horario 1"]);
+        window.horario2D = convertirHorarioD(horariosD["Horario 2"]);
+        window.horario3D = convertirHorarioD(horariosD["Horario 3"]);
+        window.horario4D = convertirHorarioD(horariosD["Horario 4"]);
 
         alert("Domingo... Comida 1: " + window.comida1D+ " Comida 2: "+ window.comida2D 
           + " Comida 3: "+ window.comida3D+ " Comida 4: "+ window.comida4D);
