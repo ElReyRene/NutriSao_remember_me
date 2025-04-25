@@ -225,8 +225,10 @@
           //     "\n🕐 Horario 4: " + window.horario4);
 
           actualizarComidasLunes();
+          alert("Mostrando datos... ");
         } catch(error){
           actualizarComidasLunesNo();
+          alert("Mostrando datos... ");
         }
         
         // ¿Qué le pasó a Martes?
@@ -237,6 +239,7 @@
         // const comidasM = dataM.Comidas;
         // const horariosM = dataM.Horarios;
         try{
+          alert("Entrando al de Martes");
           const docRefM = doc(database, "usuarios", window.email, "Martes", "datosMartes");
           const docSnapM = await getDoc(docRefM);
           const dataM = docSnapM.data();
