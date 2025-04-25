@@ -150,18 +150,20 @@
   <script>
     function guardarDatos() {
       const user = firebase.auth().currentUser;
-  
+
       if (!user) {
         alert('Usuario no autenticado');
         return;
       }
-  
-      const email = user.email.replace('.', '_'); // evitar errores en Firestore con puntos
-  
+
+      const email = user.email; 
+
+      // const email = user.email.replace('.', '_'); // evitar errores en Firestore con puntos
+
       // Obtener los datos de los inputs
       const comidasInputs = document.querySelectorAll('input[type="text"]');
       const horariosInputs = document.querySelectorAll('input[type="time"]');
-  
+
       const comidas = Array.from(comidasInputs).map(input => input.value);
       const horarios = Array.from(horariosInputs).map(input => {
         const [hours, minutes] = input.value.split(":");
@@ -170,25 +172,25 @@
         date.setMinutes(minutes);
         return firebase.firestore.Timestamp.fromDate(date);
       });
-  
+
       // Estructurar los datos
       const datos = {
         Comidas: {},
         Horarios: {}
       };
-  
+
       comidas.forEach((comida, index) => {
         datos.Comidas[`Comida ${index + 1}`] = comida;
       });
-  
+
       horarios.forEach((horario, index) => {
         datos.Horarios[`Horario ${index + 1}`] = horario;
       });
-  
+
       // Confirmación del usuario
       if (window.confirm("¿Estás seguro de que quieres guardar estos datos?")) {
         const db = firebase.firestore();
-  
+
         db.collection("usuarios")
           .doc(email)
           .collection("Sabado")
@@ -200,7 +202,6 @@
       } else {
         alert('Guardado cancelado');
       }
-      window.location.href = "index.html"; // pantalla de login
     }
     // Asegura que el usuario esté autenticado
     firebase.auth().onAuthStateChanged((user) => {
@@ -210,6 +211,7 @@
       }
     });
   </script>
+
 
 </body>
 </html>
