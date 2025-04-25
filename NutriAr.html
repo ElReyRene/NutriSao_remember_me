@@ -240,6 +240,7 @@
         // const horariosM = dataM.Horarios;
         try{
           alert("Comenzando Mares, con optimismo... ");
+          const databaseM=getFirestore(app);
           const docRefM = doc(databaseM, "usuarios", window.email, "Martes", "datosMartes");
           const docSnapM = await getDoc(docRefM);
           const dataM = docSnapM.data();
