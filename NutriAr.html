@@ -541,6 +541,27 @@
     };
   </script>
 
+<script>
+  function actualizarComidasLunesNo(){
+    const comidasLunes = [
+      "Sin información de Comida 1",
+      "Sin información de Comida 2",
+      "Sin información de Comida 3",
+      "Sin información de Comida 4"
+    ];
+    const lunesSection = document.querySelector('.day-section[data-day="lunes"]');
+
+    if (lunesSection) {
+      const mealBoxes = lunesSection.querySelectorAll('.meal-box');
+      mealBoxes.forEach((box, index) => {
+        box.textContent = comidasLunes[index];
+      });
+    }
+  };
+</script>
+
+  
+
   <!-- Día: Martes -->
   <!-- Día: Martes -->
   <!-- Día: Martes -->
@@ -601,6 +622,26 @@
     };
   </script>
 
+  <script>
+    function actualizarComidasMartesNo(){
+      const comidasMartes = [
+        "Sin información de Comida 1",
+        "Sin información de Comida 2",
+        "Sin información de Comida 3",
+        "Sin información de Comida 4"
+      ];
+      const lunesSection = document.querySelector('.day-section[data-day="lunes"]');
+
+      if (martesSection) {
+        const mealBoxes = martesSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasMartes[index];
+        });
+      }
+    };
+  </script>
+  
+
   <!-- Día: Miércoles -->
   <!-- Día: Miércoles -->
   <!-- Día: Miércoles -->
@@ -652,6 +693,25 @@
       ];
       const miercolesSection = document.querySelector('.day-section[data-day="miercoles"]');
   
+      if (miercolesSection) {
+        const mealBoxes = miercolesSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasMiercoles[index];
+        });
+      }
+    };
+  </script>
+
+  <script>
+    function actualizarComidasMiercolesNo(){
+      const comidasMiercoles = [
+        "Sin información de Comida 1",
+        "Sin información de Comida 2",
+        "Sin información de Comida 3",
+        "Sin información de Comida 4"
+      ];
+      const miercolesSection = document.querySelector('.day-section[data-day="miercoles"]');
+
       if (miercolesSection) {
         const mealBoxes = miercolesSection.querySelectorAll('.meal-box');
         mealBoxes.forEach((box, index) => {
@@ -721,6 +781,26 @@
     };
   </script>
 
+  <script>
+    function actualizarComidasJuevesNo(){
+      const comidasJueves = [
+        "Sin información de Comida 1",
+        "Sin información de Comida 2",
+        "Sin información de Comida 3",
+        "Sin información de Comida 4"
+      ];
+      
+      const juevesSection = document.querySelector('.day-section[data-day="jueves"]');
+
+      if (juevesSection) {
+        const mealBoxes = juevesSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasJueves[index];
+        });
+      }
+    };
+  </script>
+
 
   <!-- Día: Viernes -->
   <!-- Día: Viernes -->
@@ -780,6 +860,27 @@
       }
     };
   </script>
+
+  <script>
+    function actualizarComidasViernesNo(){
+      const comidasViernes = [
+        "Sin información de Comida 1",
+        "Sin información de Comida 2",
+        "Sin información de Comida 3",
+        "Sin información de Comida 4"
+      ];
+      const viernesSection = document.querySelector('.day-section[data-day="viernes"]');
+
+      if (viernesSection) {
+        const mealBoxes = viernesSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasViernes[index];
+        });
+      }
+    };
+  </script>
+
+
     
   <!-- Día: Sábado -->
   <!-- Día: Sábado -->
@@ -840,6 +941,25 @@
     };
   </script>
 
+  <script>
+    function actualizarComidasSabadoNo(){
+      const comidasSabado = [
+        "Sin información de Comida 1",
+        "Sin información de Comida 2",
+        "Sin información de Comida 3",
+        "Sin información de Comida 4"
+      ];
+
+      const sabadoSection = document.querySelector('.day-section[data-day="sabado"]');
+
+      if (sabadoSection) {
+        const mealBoxes = sabadoSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasSabado[index];
+        });
+      }
+    };
+  </script>
 
   <!-- Día: Domingo -->
   <!-- Día: Domingo -->
@@ -909,6 +1029,27 @@
       }
     };
   </script>
+
+  <script>
+    function actualizarComidasDomingoNo(){
+      const comidasDomingo = [
+        "Sin información de Comida 1",
+        "Sin información de Comida 2",
+        "Sin información de Comida 3",
+        "Sin información de Comida 4"
+      ];
+      const domingoSection = document.querySelector('.day-section[data-day="domingo"]');
+
+      if (domingoSection) {
+        const mealBoxes = domingoSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasDomingo[index];
+        });
+      }
+    };
+  </script>
+
+
 
   <!-- Updates de los circulos -->
   <!-- Updates de los circulos -->
