@@ -219,16 +219,25 @@
         window.comida3 = comidas["Comida 3"];
         window.comida4 = comidas["Comida 4"];
 
-        window.horario1 = horarios["Horario 1"];
-        window.horario2 = horarios["Horario 2"];
-        window.horario3 = horarios["Horario 3"];
-        window.horario4 = horarios["Horario 4"];
+        const convertirHorario = (timestamp) => {
+          if (!timestamp?.toDate) return "Hora inválida";
+          const date = timestamp.toDate();
+          const horas = date.getHours().toString().padStart(2, '0');
+          const minutos = date.getMinutes().toString().padStart(2, '0');
+          return `${horas}:${minutos}`;
+        };
+        window.horario1 = convertirHorario(horarios["Horario 1"]);
+        window.horario2 = convertirHorario(horarios["Horario 2"]);
+        window.horario3 = convertirHorario(horarios["Horario 3"]);
+        window.horario4 = convertirHorario(horarios["Horario 4"]);
 
         alert("Comida 1: " + window.comida1+ " Comida 2: "+ window.comida2 
           + " Comida 3: "+ window.comida3+ " Comida 4: "+ window.comida4);
         
-        alert("Horario 1: " + window.horario1+ " Horario 2: "+ window.horario2 
-          + " Horario 3: "+ window.horario3+ " Horario 4: "+ window.horario4);
+        alert("🕐 Horario 1: " + window.horario1 + 
+            "\n🕐 Horario 2: " + window.horario2 + 
+            "\n🕐 Horario 3: " + window.horario3 + 
+            "\n🕐 Horario 4: " + window.horario4);
         actualizarComidasLunes();
       }
     });
