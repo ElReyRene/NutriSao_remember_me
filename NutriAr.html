@@ -165,6 +165,12 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const database=getFirestore(app);
+    const databaseM=getFirestore(app);
+    const databaseMi=getFirestore(app);
+    const databaseJ=getFirestore(app);
+    const databaseV=getFirestore(app);
+    const databaseS=getFirestore(app);
+    const databaseD=getFirestore(app);
     const user = auth.currentUser;
   
     onAuthStateChanged(auth, async(user) => {
