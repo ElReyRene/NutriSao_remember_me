@@ -165,12 +165,6 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const database=getFirestore(app);
-    const databaseM=getFirestore(app);
-    const databaseMi=getFirestore(app);
-    const databaseJ=getFirestore(app);
-    const databaseV=getFirestore(app);
-    const databaseS=getFirestore(app);
-    const databaseD=getFirestore(app);
     const user = auth.currentUser;
   
     onAuthStateChanged(auth, async(user) => {
@@ -245,8 +239,7 @@
         // const comidasM = dataM.Comidas;
         // const horariosM = dataM.Horarios;
         try{
-          alert("Entrando al de Martes");
-          const docRefM = doc(database, "usuarios", window.email, "Martes", "datosMartes");
+          const docRefM = doc(databaseM, "usuarios", window.email, "Martes", "datosMartes");
           const docSnapM = await getDoc(docRefM);
           const dataM = docSnapM.data();
           const comidasM = dataM.Comidas;
