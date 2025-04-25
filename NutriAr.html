@@ -294,10 +294,10 @@
   <script>
     function actualizarComidasLunes(){
       const comidasLunes = [
-        window.comida1 + window.horario1 || "Comida 1 no disponible",
-        window.comida2 + window.horario2 || "Comida 2 no disponible",
-        window.comida3 + window.horario3 || "Comida 3 no disponible",
-        window.comida4 + window.horario4 || "Comida 4 no disponible"
+        window.comida1 + "         " + window.horario1 + "  🕐" || "Comida 1 no disponible",
+        window.comida2 + "         " + window.horario2 + "  🕐" || "Comida 2 no disponible",
+        window.comida3 + "         " + window.horario3 + "  🕐" || "Comida 3 no disponible",
+        window.comida4 + "         " + window.horario4 + "  🕐" || "Comida 4 no disponible"
       ];
       const lunesSection = document.querySelector('.day-section[data-day="lunes"]');
   
