@@ -239,7 +239,7 @@
         // const comidasM = dataM.Comidas;
         // const horariosM = dataM.Horarios;
         try{
-          alert("Comenzando Mares, con optimismo... ");
+          alert("Comenzando Martes, con optimismo... ");
           const databaseM=getFirestore(app);
           const docRefM = doc(databaseM, "usuarios", window.email, "Martes", "datosMartes");
           const docSnapM = await getDoc(docRefM);
@@ -615,7 +615,7 @@
         "                           " + window.comida3M + "                  " + window.horario3M + "  🕐" || "Comida 3 no disponible",
         "                           " + window.comida4M + "                  " + window.horario4M + "  🕐" || "Comida 4 no disponible"
       ];
-      const lunesSection = document.querySelector('.day-section[data-day="lunes"]');
+      const lunesSection = document.querySelector('.day-section[data-day="martes"]');
   
       if (martesSection) {
         const mealBoxes = martesSection.querySelectorAll('.meal-box');
@@ -634,7 +634,7 @@
         "Sin información de Comida 3",
         "Sin información de Comida 4"
       ];
-      const lunesSection = document.querySelector('.day-section[data-day="lunes"]');
+      const lunesSection = document.querySelector('.day-section[data-day="martes"]');
 
       if (martesSection) {
         const mealBoxes = martesSection.querySelectorAll('.meal-box');
