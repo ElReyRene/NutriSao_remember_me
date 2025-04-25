@@ -239,6 +239,7 @@
         // const comidasM = dataM.Comidas;
         // const horariosM = dataM.Horarios;
         try{
+          alert("Comenzando Mares, con optimismo... ");
           const docRefM = doc(databaseM, "usuarios", window.email, "Martes", "datosMartes");
           const docSnapM = await getDoc(docRefM);
           const dataM = docSnapM.data();
@@ -543,24 +544,24 @@
     };
   </script>
 
-<script>
-  function actualizarComidasLunesNo(){
-    const comidasLunes = [
-      "Sin información de Comida 1",
-      "Sin información de Comida 2",
-      "Sin información de Comida 3",
-      "Sin información de Comida 4"
-    ];
-    const lunesSection = document.querySelector('.day-section[data-day="lunes"]');
+  <script>
+    function actualizarComidasLunesNo(){
+      const comidasLunes = [
+        "Sin información de Comida 1",
+        "Sin información de Comida 2",
+        "Sin información de Comida 3",
+        "Sin información de Comida 4"
+      ];
+      const lunesSection = document.querySelector('.day-section[data-day="lunes"]');
 
-    if (lunesSection) {
-      const mealBoxes = lunesSection.querySelectorAll('.meal-box');
-      mealBoxes.forEach((box, index) => {
-        box.textContent = comidasLunes[index];
-      });
-    }
-  };
-</script>
+      if (lunesSection) {
+        const mealBoxes = lunesSection.querySelectorAll('.meal-box');
+        mealBoxes.forEach((box, index) => {
+          box.textContent = comidasLunes[index];
+        });
+      }
+    };
+  </script>
 
   
 
