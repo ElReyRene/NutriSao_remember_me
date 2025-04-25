@@ -182,46 +182,63 @@
         // Obteniendo datos de base de datos
 
         const docRef = doc(database, "usuarios", window.email, "Lunes", "datosLunes");
-        // const docRefM = doc(database, "usuarios", window.email, "Martes", "datosMartes");
-        // const docRefMi = doc(database, "usuarios", window.email, "Miercoles", "datosMiercoles");
-	      // const docRefJ = doc(database, "usuarios", window.email, "Jueves", "datosJueves");
-        // const docRefV = doc(database, "usuarios", window.email, "Viernes", "datosViernes");
-	      // const docRefS = doc(database, "usuarios", window.email, "Sabado", "datosSabado");
-        // const docRefD = doc(database, "usuarios", window.email, "Domingo", "datosDomingo");
+        const docRefM = doc(database, "usuarios", window.email, "Martes", "datosMartes");
+        const docRefMi = doc(database, "usuarios", window.email, "Miercoles", "datosMiercoles");
+	      const docRefJ = doc(database, "usuarios", window.email, "Jueves", "datosJueves");
+        const docRefV = doc(database, "usuarios", window.email, "Viernes", "datosViernes");
+	      const docRefS = doc(database, "usuarios", window.email, "Sabado", "datosSabado");
+        const docRefD = doc(database, "usuarios", window.email, "Domingo", "datosDomingo");
 
         // Obteniendo Snapshot
 
         const docSnap = await getDoc(docRef);
-        // const docSnapM = await getDoc(docRefM);
-        // const docSnapMi = await getDoc(docRefMi);
-        // const docSnapJ = await getDoc(docRefJ);
-        // const docSnapV = await getDoc(docRefV);
-        // const docSnapS = await getDoc(docRefS);
-        // const docSnapD = await getDoc(docRefD);
+        const docSnapM = await getDoc(docRefM);
+        const docSnapMi = await getDoc(docRefMi);
+        const docSnapJ = await getDoc(docRefJ);
+        const docSnapV = await getDoc(docRefV);
+        const docSnapS = await getDoc(docRefS);
+        const docSnapD = await getDoc(docRefD);
 
         // Obteniendo dato Lunes
         // Obteniendo dato Lunes
         const data =docSnap.data();
-        // const dataM = docSnapM.data();
-        // const dataMi = docSnapMi.data();
-        // const dataJ = docSnapJ.data();
-        // const dataV = docSnapV.data();
-        // const dataS = docSnapS.data();
-        // const dataD = docSnapD.data();
+        const dataM = docSnapM.data();
+        const dataMi = docSnapMi.data();
+        const dataJ = docSnapJ.data();
+        const dataV = docSnapV.data();
+        const dataS = docSnapS.data();
+        const dataD = docSnapD.data();
 
         // alert("Datos: " + JSON.stringify(data));
+
+        // Datos... Horarios y Comidas
+        // Datos... Horarios y Comidas
+        // Datos... Horarios y Comidas
+
         const comidas = data.Comidas;
         const horarios = data.Horarios;
-        // Alertas de los datos, alertaaaaaaaaaaa
-        // Alertas de los datos, alertaaaaaaaaaaa
-        // alert("Comidas: " + JSON.stringify(comidas));
-        // alert("Horarios: " + JSON.stringify(horarios));
-        // Alertas de los datos, alertaaaaaaaaaaa
-        // Alertas de los datos, alertaaaaaaaaaaa
-        window.comida1 = comidas["Comida 1"];
-        window.comida2 = comidas["Comida 2"];
-        window.comida3 = comidas["Comida 3"];
-        window.comida4 = comidas["Comida 4"];
+
+        const comidasM = dataM.Comidas;
+        const horariosM = dataM.Horarios;
+
+        const comidasMi = dataMi.Comidas;
+        const horariosMi = dataMi.Horarios;
+
+        const comidasJ = dataJ.Comidas;
+        const horariosJ = dataJ.Horarios;
+
+        const comidasV = dataV.Comidas;
+        const horariosV = dataV.Horarios;
+
+        const comidasS = dataS.Comidas;
+        const horariosS = dataS.Horarios;
+
+        const comidasD = dataD.Comidas;
+        const horariosD = dataD.Horarios;
+        
+        // Conversión de horas
+        // Conversión de horas
+        // Conversión de horas
 
         const convertirHorario = (timestamp) => {
           if (!timestamp?.toDate) return "Hora inválida";
@@ -230,19 +247,185 @@
           const minutos = date.getMinutes().toString().padStart(2, '0');
           return `${horas}:${minutos}`;
         };
+
+        // Conversión de horas
+        // Conversión de horas
+        // Conversión de horas
+
+        // ¿Qué le pasó a Lunes?
+        // ¿Qué le pasó a Lunes?
+        // ¿Qué le pasó a Lunes?
+
+        // .....CONSTANTES UTILIZADAS....
+        // const comidas = data.Comidas;
+        // const horarios = data.Horarios;
+
+        window.comida1 = comidas["Comida 1"];
+        window.comida2 = comidas["Comida 2"];
+        window.comida3 = comidas["Comida 3"];
+        window.comida4 = comidas["Comida 4"];
+
+        
         window.horario1 = convertirHorario(horarios["Horario 1"]);
         window.horario2 = convertirHorario(horarios["Horario 2"]);
         window.horario3 = convertirHorario(horarios["Horario 3"]);
         window.horario4 = convertirHorario(horarios["Horario 4"]);
 
-        alert("Comida 1: " + window.comida1+ " Comida 2: "+ window.comida2 
+        alert("Lunes... Comida 1: " + window.comida1+ " Comida 2: "+ window.comida2 
           + " Comida 3: "+ window.comida3+ " Comida 4: "+ window.comida4);
-        
-        alert("🕐 Horario 1: " + window.horario1 + 
-            "\n🕐 Horario 2: " + window.horario2 + 
-            "\n🕐 Horario 3: " + window.horario3 + 
-            "\n🕐 Horario 4: " + window.horario4);
+
+        // alert("🕐 Horario 1: " + window.horario1 + 
+        //     "\n🕐 Horario 2: " + window.horario2 + 
+        //     "\n🕐 Horario 3: " + window.horario3 + 
+        //     "\n🕐 Horario 4: " + window.horario4);
+
         actualizarComidasLunes();
+        
+        
+        // ¿Qué le pasó a Martes?
+        // ¿Qué le pasó a Martes?
+        // ¿Qué le pasó a Martes?
+
+        // .....CONSTANTES UTILIZADAS....
+        // const comidasM = dataM.Comidas;
+        // const horariosM = dataM.Horarios;
+
+        window.comida1M = comidasM["Comida 1"];
+        window.comida2M = comidasM["Comida 2"];
+        window.comida3M = comidasM["Comida 3"];
+        window.comida4M = comidasM["Comida 4"];
+
+        
+        window.horario1M = convertirHorario(horariosM["Horario 1"]);
+        window.horario2M = convertirHorario(horariosM["Horario 2"]);
+        window.horario3M = convertirHorario(horariosM["Horario 3"]);
+        window.horario4M = convertirHorario(horariosM["Horario 4"]);
+
+        alert("Martes... Comida 1: " + window.comida1M+ " Comida 2: "+ window.comida2M 
+          + " Comida 3: "+ window.comida3M+ " Comida 4: "+ window.comida4M);
+
+        actualizarComidasMartes();
+        
+        // ¿Qué le pasó a Miércoles?
+        // ¿Qué le pasó a Miércoles?
+        // ¿Qué le pasó a Miércoles?
+        
+        // .....CONSTANTES UTILIZADAS....
+        // const comidasMi = dataMi.Comidas;
+        // const horariosMi = dataMi.Horarios;
+
+        window.comida1Mi = comidasMi["Comida 1"];
+        window.comida2Mi = comidasMi["Comida 2"];
+        window.comida3Mi = comidasMi["Comida 3"];
+        window.comida4Mi = comidasMi["Comida 4"];
+
+        
+        window.horario1Mi = convertirHorario(horariosMi["Horario 1"]);
+        window.horario2Mi = convertirHorario(horariosMi["Horario 2"]);
+        window.horario3Mi = convertirHorario(horariosMi["Horario 3"]);
+        window.horario4Mi = convertirHorario(horariosMi["Horario 4"]);
+
+        alert("Miercoles... Comida 1: " + window.comida1Mi+ " Comida 2: "+ window.comida2Mi
+          + " Comida 3: "+ window.comida3Mi+ " Comida 4: "+ window.comida4Mi);
+
+        actualizarComidasMiercoles();
+
+        // ¿Qué le pasó a Jueves?
+        // ¿Qué le pasó a Jueves?
+        // ¿Qué le pasó a Jueves?
+
+        // .....CONSTANTES UTILIZADAS....
+        // const comidasJ = dataJ.Comidas;
+        // const horariosJ = dataJ.Horarios;
+
+        window.comida1J = comidasJ["Comida 1"];
+        window.comida2J = comidasJ["Comida 2"];
+        window.comida3J = comidasJ["Comida 3"];
+        window.comida4J = comidasJ["Comida 4"];
+
+        
+        window.horario1J = convertirHorario(horariosJ["Horario 1"]);
+        window.horario2J = convertirHorario(horariosJ["Horario 2"]);
+        window.horario3J = convertirHorario(horariosJ["Horario 3"]);
+        window.horario4J = convertirHorario(horariosJ["Horario 4"]);
+
+        alert("Jueves... Comida 1: " + window.comida1J+ " Comida 2: "+ window.comida2J 
+          + " Comida 3: "+ window.comida3J+ " Comida 4: "+ window.comida4J);
+
+        actualizarComidasJueves();
+
+        // ¿Qué le pasó a Viernes?
+        // ¿Qué le pasó a Viernes?
+        // ¿Qué le pasó a Viernes?
+
+        // .....CONSTANTES UTILIZADAS....
+        // const comidasV = dataV.Comidas;
+        // const horariosV = dataV.Horarios;
+
+        window.comida1V = comidasV["Comida 1"];
+        window.comida2V = comidasV["Comida 2"];
+        window.comida3V = comidasV["Comida 3"];
+        window.comida4V = comidasV["Comida 4"];
+
+        
+        window.horario1V = convertirHorario(horariosV["Horario 1"]);
+        window.horario2V = convertirHorario(horariosV["Horario 2"]);
+        window.horario3V = convertirHorario(horariosV["Horario 3"]);
+        window.horario4V = convertirHorario(horariosV["Horario 4"]);
+
+        alert("viernes... Comida 1: " + window.comida1V+ " Comida 2: "+ window.comida2V 
+          + " Comida 3: "+ window.comida3V+ " Comida 4: "+ window.comida4V);
+
+        actualizarComidasViernes();
+
+        // ¿Qué le pasó a Sábado?
+        // ¿Qué le pasó a Sábado?
+        // ¿Qué le pasó a Sábado?
+
+        // .....CONSTANTES UTILIZADAS....
+        // const comidasS = dataS.Comidas;
+        // const horariosS = dataS.Horarios;
+
+        window.comida1S = comidasS["Comida 1"];
+        window.comida2S = comidasS["Comida 2"];
+        window.comida3S = comidasS["Comida 3"];
+        window.comida4S = comidasS["Comida 4"];
+
+        
+        window.horario1S = convertirHorario(horariosS["Horario 1"]);
+        window.horario2S = convertirHorario(horariosS["Horario 2"]);
+        window.horario3S = convertirHorario(horariosS["Horario 3"]);
+        window.horario4S = convertirHorario(horariosS["Horario 4"]);
+
+        alert("Sabado... Comida 1: " + window.comida1S+ " Comida 2: "+ window.comida2S 
+          + " Comida 3: "+ window.comida3S+ " Comida 4: "+ window.comida4S);
+
+        actualizarComidasSabado();
+
+        // ¿Qué le pasó a Domingo?
+        // ¿Qué le pasó a Domingo?
+        // ¿Qué le pasó a Domingo?
+
+        // .....CONSTANTES UTILIZADAS....
+        // const comidasD = dataD.Comidas;
+        // const horariosD = dataD.Horarios;
+
+        window.comida1D = comidasD["Comida 1"];
+        window.comida2D = comidasD["Comida 2"];
+        window.comida3D = comidasD["Comida 3"];
+        window.comida4D = comidasD["Comida 4"];
+
+        
+        window.horario1D = convertirHorario(horariosD["Horario 1"]);
+        window.horario2D = convertirHorario(horariosD["Horario 2"]);
+        window.horario3D = convertirHorario(horariosD["Horario 3"]);
+        window.horario4D = convertirHorario(horariosD["Horario 4"]);
+
+        alert("Domingo... Comida 1: " + window.comida1D+ " Comida 2: "+ window.comida2D 
+          + " Comida 3: "+ window.comida3D+ " Comida 4: "+ window.comida4D);
+
+        actualizarComidasDomingo();
+
       }
     });
   </script>
@@ -355,15 +538,15 @@
     </div>
   </div>
 
-  <!-- <script>
+  <script>
     function actualizarComidasMartes(){
       const comidasMartes = [
-        window.comida1 || "Comida 1 no disponible",
-        window.comida2 || "Comida 2 no disponible",
-        window.comida3 || "Comida 3 no disponible",
-        window.comida4 || "Comida 4 no disponible"
+        "                           " + window.comida1M + "                  " + window.horario1M + "  🕐" || "Comida 1 no disponible",
+        "                           " + window.comida2M + "                  " + window.horario2M + "  🕐" || "Comida 2 no disponible",
+        "                           " + window.comida3M + "                  " + window.horario3M + "  🕐" || "Comida 3 no disponible",
+        "                           " + window.comida4M + "                  " + window.horario4M + "  🕐" || "Comida 4 no disponible"
       ];
-      const martesSection = document.querySelector('.day-section[data-day="martes"]');
+      const lunesSection = document.querySelector('.day-section[data-day="lunes"]');
   
       if (martesSection) {
         const mealBoxes = martesSection.querySelectorAll('.meal-box');
@@ -372,7 +555,7 @@
         });
       }
     };
-  </script> -->
+  </script>
 
   <!-- Día: Miércoles -->
   <!-- Día: Miércoles -->
@@ -414,13 +597,14 @@
     </div>
   </div>
 
-  <!-- <script>
+
+  <script>
     function actualizarComidasMiercoles(){
       const comidasMiercoles = [
-        window.comida1 || "Comida 1 no disponible",
-        window.comida2 || "Comida 2 no disponible",
-        window.comida3 || "Comida 3 no disponible",
-        window.comida4 || "Comida 4 no disponible"
+        "                           " + window.comida1Mi + "                  " + window.horario1Mi + "  🕐" || "Comida 1 no disponible",
+        "                           " + window.comida2Mi + "                  " + window.horario2Mi + "  🕐" || "Comida 2 no disponible",
+        "                           " + window.comida3Mi + "                  " + window.horario3Mi + "  🕐" || "Comida 3 no disponible",
+        "                           " + window.comida4Mi + "                  " + window.horario4Mi + "  🕐" || "Comida 4 no disponible"
       ];
       const miercolesSection = document.querySelector('.day-section[data-day="miercoles"]');
   
@@ -431,7 +615,7 @@
         });
       }
     };
-  </script> -->
+  </script>
 
   <!-- Día: Jueves -->
   <!-- Día: Jueves -->
@@ -473,14 +657,15 @@
     </div>
   </div>
 
-  <!-- <script>
+  <script>
     function actualizarComidasJueves(){
       const comidasJueves = [
-        window.comida1 || "Comida 1 no disponible",
-        window.comida2 || "Comida 2 no disponible",
-        window.comida3 || "Comida 3 no disponible",
-        window.comida4 || "Comida 4 no disponible"
+        "                           " + window.comida1J + "                  " + window.horario1J + "  🕐" || "Comida 1 no disponible",
+        "                           " + window.comida2J + "                  " + window.horario2J + "  🕐" || "Comida 2 no disponible",
+        "                           " + window.comida3J + "                  " + window.horario3J + "  🕐" || "Comida 3 no disponible",
+        "                           " + window.comida4J + "                  " + window.horario4J + "  🕐" || "Comida 4 no disponible"
       ];
+      
       const juevesSection = document.querySelector('.day-section[data-day="jueves"]');
   
       if (juevesSection) {
@@ -490,7 +675,7 @@
         });
       }
     };
-  </script> -->
+  </script>
 
 
   <!-- Día: Viernes -->
@@ -533,13 +718,13 @@
     </div>
   </div>
 
-  <!-- <script>
+  <script>
     function actualizarComidasViernes(){
       const comidasViernes = [
-        window.comida1 || "Comida 1 no disponible",
-        window.comida2 || "Comida 2 no disponible",
-        window.comida3 || "Comida 3 no disponible",
-        window.comida4 || "Comida 4 no disponible"
+        "                           " + window.comida1V + "                  " + window.horario1V + "  🕐" || "Comida 1 no disponible",
+        "                           " + window.comida2V + "                  " + window.horario2V + "  🕐" || "Comida 2 no disponible",
+        "                           " + window.comida3V + "                  " + window.horario3V + "  🕐" || "Comida 3 no disponible",
+        "                           " + window.comida4V + "                  " + window.horario4V + "  🕐" || "Comida 4 no disponible"
       ];
       const viernesSection = document.querySelector('.day-section[data-day="viernes"]');
   
@@ -550,7 +735,7 @@
         });
       }
     };
-  </script> -->
+  </script>
     
   <!-- Día: Sábado -->
   <!-- Día: Sábado -->
@@ -592,13 +777,13 @@
     </div>
   </div>
 
-  <!-- <script>
+  <script>
     function actualizarComidasSabado(){
       const comidasSabado = [
-        window.comida1 || "Comida 1 no disponible",
-        window.comida2 || "Comida 2 no disponible",
-        window.comida3 || "Comida 3 no disponible",
-        window.comida4 || "Comida 4 no disponible"
+        "                           " + window.comida1S + "                  " + window.horario1S + "  🕐" || "Comida 1 no disponible",
+        "                           " + window.comida2S + "                  " + window.horario2S + "  🕐" || "Comida 2 no disponible",
+        "                           " + window.comida3S + "                  " + window.horario3S + "  🕐" || "Comida 3 no disponible",
+        "                           " + window.comida4S + "                  " + window.horario4S + "  🕐" || "Comida 4 no disponible"
       ];
       const sabadoSection = document.querySelector('.day-section[data-day="sabado"]');
   
@@ -609,7 +794,7 @@
         });
       }
     };
-  </script> -->
+  </script>
 
 
   <!-- Día: Domingo -->
@@ -653,12 +838,22 @@
   </div>
 
   <!-- <script>
-    function actualizarComidasDomingo(){
-      const comidasDomingo = [
+    
         window.comida1 || "Comida 1 no disponible",
         window.comida2 || "Comida 2 no disponible",
         window.comida3 || "Comida 3 no disponible",
         window.comida4 || "Comida 4 no disponible"
+      ];
+      
+  </script> -->
+
+  <script>
+    function actualizarComidasDomingo(){
+      const comidasDomingo = [
+        "                           " + window.comida1D + "                  " + window.horario1D + "  🕐" || "Comida 1 no disponible",
+        "                           " + window.comida2D + "                  " + window.horario2D + "  🕐" || "Comida 2 no disponible",
+        "                           " + window.comida3D + "                  " + window.horario3D + "  🕐" || "Comida 3 no disponible",
+        "                           " + window.comida4D + "                  " + window.horario4D + "  🕐" || "Comida 4 no disponible"
       ];
       const domingoSection = document.querySelector('.day-section[data-day="domingo"]');
   
@@ -669,7 +864,7 @@
         });
       }
     };
-  </script> -->
+  </script>
 
   <!-- Updates de los circulos -->
   <!-- Updates de los circulos -->
